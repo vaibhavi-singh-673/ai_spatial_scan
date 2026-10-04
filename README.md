@@ -299,5 +299,4 @@ does not upload data. Tracked examples are available under `web/samples/`, and
 the dashboard includes one-click quality, room, and benchmark samples.
 The dashboard visibly labels these as sample data: they are runnable examples,
 not laser/tape ground truth, repeat captures, or incumbent exports.
-#   a i _ s p a t i a l _ s c a n  
- 
+#
