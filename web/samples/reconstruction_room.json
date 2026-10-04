@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "capture_id": "sample_room_01",
+  "tier": "lidar",
+  "input": "sample reports / room reconstruction",
+  "rooms": [{
+    "id": "room_01",
+    "name": "Living room",
+    "floor_area_m2": {"value": 18.6},
+    "ceiling_height_m": {"value": 2.52},
+    "walls": [{"value": 4.8}, {"value": 3.9}, {"value": 4.8}, {"value": 3.9}]
+  }],
+  "diagnostics": {"frames_used": 120, "point_count": 184000},
+  "recommendations": ["Confirm measurements against laser/tape ground truth before submission."]
+}

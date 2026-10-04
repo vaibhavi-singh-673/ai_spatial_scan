@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "tier": "video",
+  "input": "sample reports / calibrated video",
+  "score": 100,
+  "readiness": "READY_WITH_CAVEATS",
+  "checks": [
+    {"name": "video_file_found", "status": "PASS", "details": {"files": ["room_01_walkthrough.mp4"]}},
+    {"name": "frames_decoded", "status": "PASS", "details": {"decoded_frames": 120}},
+    {"name": "minimum_frame_count", "status": "PASS", "details": {"minimum": 3}},
+    {"name": "usable_resolution", "status": "PASS", "details": {"width": 3840, "height": 2160}},
+    {"name": "metric_calibration_declared", "status": "PASS", "details": {"scale_m_per_pixel": 0.0025}}
+  ],
+  "recommendations": []
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "capture_id": "sample_property_a",
+  "tier": "lidar",
+  "input": "sample reports / multi-room reconstruction",
+  "rooms": [
+    {"id": "R1", "name": "Living room", "floor_area_m2": {"value": 18.6}, "ceiling_height_m": {"value": 2.52}, "walls": [{"value": 4.8}, {"value": 3.9}]},
+    {"id": "R2", "name": "Kitchen", "floor_area_m2": {"value": 11.2}, "ceiling_height_m": {"value": 2.51}, "walls": [{"value": 3.7}, {"value": 3.0}]},
+    {"id": "R3", "name": "Bedroom", "floor_area_m2": {"value": 13.4}, "ceiling_height_m": {"value": 2.50}, "walls": [{"value": 4.1}, {"value": 3.3}]},
+    {"id": "C1", "name": "Connector", "floor_area_m2": {"value": 4.1}, "ceiling_height_m": {"value": 2.50}, "walls": [{"value": 2.2}, {"value": 1.8}]}
+  ],
+  "diagnostics": {"frames_used": 240, "point_count": 382000, "loop_closure_applied": true},
+  "recommendations": ["Confirm room boundaries and openings against measured ground truth."]
+}

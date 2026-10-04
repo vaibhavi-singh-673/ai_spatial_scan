@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "tier": "photos",
+  "input": "sample reports / uncalibrated photo room",
+  "score": 80,
+  "readiness": "REVIEW",
+  "checks": [
+    {"name": "image_found", "status": "PASS", "details": {"decoded_images": 4}},
+    {"name": "room_view_count", "status": "PASS", "details": {"recommended_range": [2, 8]}},
+    {"name": "usable_resolution", "status": "PASS", "details": {"width": 3024, "height": 4032}},
+    {"name": "metric_calibration_declared", "status": "FAIL", "details": {"reason": "Measured scale is required"}}
+  ],
+  "recommendations": ["Add a measured scale reference before making metric accuracy claims."]
+}

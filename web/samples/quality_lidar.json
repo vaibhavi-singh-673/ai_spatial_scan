@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "tier": "lidar",
+  "input": "sample reports / LiDAR capture",
+  "score": 100,
+  "readiness": "READY_WITH_CAVEATS",
+  "checks": [
+    {"name": "required_metadata", "status": "PASS", "details": {"missing": []}},
+    {"name": "camera_matrix", "status": "PASS", "details": {"shape": [3, 3]}},
+    {"name": "depth_frames_decoded", "status": "PASS", "details": {"decoded": 120, "total": 120}},
+    {"name": "confidence_coverage", "status": "PASS", "details": {"with_confidence": 120}},
+    {"name": "pose_coverage", "status": "PASS", "details": {"with_pose": 120}},
+    {"name": "imu_samples", "status": "PASS", "details": {"samples": 3600}}
+  ],
+  "recommendations": []
+}

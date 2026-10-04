@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "captures": [],
+  "required_fields": [
+    "capture_id","tier","device","rooms","raw_path","ground_truth_path",
+    "repeat_group","incumbent_export"
+  ],
+  "notes": "Populate only with measured captures. Never synthesize gate results."
+}

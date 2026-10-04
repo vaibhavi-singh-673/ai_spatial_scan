@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "captures": [
+    {
+      "capture_id": "A_lidar_01",
+      "tier": "lidar",
+      "device": "iPhone 15 Pro",
+      "rooms": ["R1", "R2", "R3", "C1"],
+      "raw_path": "benchmarks/raw/A_lidar_01",
+      "ground_truth_path": "benchmarks/ground_truth/A.json",
+      "repeat_group": "R1_lidar_repeat",
+      "incumbent_export": "benchmarks/raw/incumbent/A_R1.zip",
+      "conditions": ["clean", "clutter", "glass"]
+    }
+  ],
+  "notes": "Replace this example with measured captures. Never synthesize gate results."
+}

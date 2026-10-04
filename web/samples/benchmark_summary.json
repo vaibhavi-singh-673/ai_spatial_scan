@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "tier": "all",
+  "input": "sample reports / benchmark gates",
+  "score": 72,
+  "readiness": "REVIEW",
+  "checks": [
+    {"name": "lidar_ceiling_gate", "status": "PASS", "details": {"max_error_m": 0.009, "tolerance_m": 0.015}},
+    {"name": "photo_footprint_gate", "status": "FAIL", "details": {"error_fraction": 0.11, "tolerance_fraction": 0.08}},
+    {"name": "video_footprint_gate", "status": "PASS", "details": {"error_fraction": 0.026, "tolerance_fraction": 0.03}},
+    {"name": "repeatability", "status": "PASS", "details": {"captures": 2}},
+    {"name": "incumbent_comparison", "status": "FAIL", "details": {"shared_dimensions": 8, "our_wins": 5, "required_fraction": 0.7}}
+  ],
+  "recommendations": ["Collect calibrated photo captures and preserve the incumbent export before claiming an aggregate win."]
+}

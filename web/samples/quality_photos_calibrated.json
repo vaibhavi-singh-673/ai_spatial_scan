@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "tier": "photos",
+  "input": "sample reports / calibrated photo room",
+  "score": 100,
+  "readiness": "READY_WITH_CAVEATS",
+  "checks": [
+    {"name": "image_found", "status": "PASS", "details": {"decoded_images": 4}},
+    {"name": "room_view_count", "status": "PASS", "details": {"recommended_range": [2, 8]}},
+    {"name": "usable_resolution", "status": "PASS", "details": {"width": 3024, "height": 4032}},
+    {"name": "metric_calibration_declared", "status": "PASS", "details": {"scale_m_per_pixel": 0.01}}
+  ],
+  "recommendations": []
+}

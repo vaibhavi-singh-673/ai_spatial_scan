@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SpatialScan Control Room</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">S</span><span>SpatialScan</span></div>
+      <div class="top-actions">
+        <label class="file-button" for="file-input">Load report</label>
+        <input id="file-input" type="file" accept=".json,application/json" multiple>
+        <select id="sample-select" class="sample-select" aria-label="Choose a sample report">
+          <option value="video">Calibrated video quality</option>
+          <option value="lidar">LiDAR quality</option>
+          <option value="room">Single-room reconstruction</option>
+          <option value="photo">Calibrated photo quality</option>
+          <option value="benchmark">Passing benchmark summary</option>
+          <option value="multi-room">Multi-room reconstruction</option>
+          <option value="audit">Rubric evidence audit</option>
+        </select>
+        <button id="load-sample-button" class="quiet-button" type="button">Load sample</button>
+        <button id="demo-button" class="quiet-button" type="button">Demo state</button>
+      </div>
+    </header>
+
+    <section class="intro">
+      <div>
+        <p class="eyebrow">LOCAL CAPTURE REVIEW</p>
+        <h1>Know what is ready<br>before you claim accuracy.</h1>
+        <p class="lede">A visual control room for capture quality, reconstruction evidence, and the next action.</p>
+      </div>
+      <div class="capture-brief">
+        <p class="eyebrow">CURRENT WORKSPACE</p>
+        <strong>Local review only</strong>
+        <p>Choose a sample report above or load a JSON result from your local run.</p>
+        <div class="brief-row"><span>Source</span><b>fixtures / runs</b></div>
+        <div class="brief-row"><span>Walkthroughs</span><b>4 areas available</b></div>
+      </div>
+    </section>
+
+    <section class="status-strip" aria-label="Current capture status">
+      <div><span class="label">ACTIVE TIER</span><strong id="tier-value">VIDEO</strong></div>
+      <div><span class="label">READINESS</span><strong id="readiness-value" class="status-review">REVIEW</strong></div>
+      <div><span class="label">SCORE</span><strong id="score-value">80<span class="unit">/100</span></strong></div>
+      <div><span class="label">INPUT</span><strong id="input-value">fixtures/video</strong></div>
+    </section>
+    <p id="status-note" class="status-note">Review means the capture can be processed, but evidence is missing before an accuracy claim.</p>
+    <aside class="evidence-notice" aria-label="Sample data notice">
+      <strong>Sample-data mode</strong>
+      <span>This workspace includes runnable examples, not real laser/tape ground truth, repeat captures, or incumbent exports. Do not treat sample PASS results as benchmark accuracy.</span>
+    </aside>
+
+    <section class="content-grid">
+      <article class="panel score-panel">
+        <div class="panel-heading"><div><p class="eyebrow">READINESS INDEX</p><h2>Capture health</h2></div><span id="score-ring" class="score-ring">80</span></div>
+        <div class="meter"><span id="score-meter"></span></div>
+        <p id="score-caption" class="muted">Strong technical capture. Calibration evidence is still needed.</p>
+        <div class="mini-stats"><div><strong id="pass-count">4</strong><span>passed checks</span></div><div><strong id="fail-count">1</strong><span>needs attention</span></div></div>
+      </article>
+
+      <article class="panel recommendation-panel">
+        <div class="panel-heading"><div><p class="eyebrow">NEXT ACTION</p><h2>Make the run stronger</h2></div><span class="action-mark">!</span></div>
+        <p id="recommendation-text">Add a measured scale reference before making metric accuracy claims.</p>
+        <div class="action-line"><span class="dot"></span><span id="recommendation-source">Calibration gate</span></div>
+      </article>
+    </section>
+
+    <section class="panel evidence-panel">
+      <div class="panel-heading"><div><p class="eyebrow">EVIDENCE LEDGER</p><h2>What the pipeline can prove</h2></div><span id="check-count" class="count-badge">5 checks</span></div>
+      <div id="checks" class="checks"></div>
+    </section>
+
+    <section id="rubric-panel" class="panel rubric-panel hidden">
+      <div class="panel-heading"><div><p class="eyebrow">SUBMISSION READINESS</p><h2>Scoring rubric evidence</h2></div><span id="rubric-score" class="count-badge">0 / 100 verified</span></div>
+      <p id="rubric-note" class="muted">This view separates implemented infrastructure from evidence that requires real measured captures.</p>
+      <div id="rubric-items" class="rubric-items"></div>
+    </section>
+
+    <section id="rooms-panel" class="panel rooms-panel hidden">
+      <div class="panel-heading"><div><p class="eyebrow">RECONSTRUCTION</p><h2>Room measurements</h2></div><span class="count-badge">JSON output</span></div>
+      <div id="rooms" class="rooms"></div>
+    </section>
+
+    <section class="panel video-panel">
+      <div class="panel-heading"><div><p class="eyebrow">CAPTURE PREVIEW</p><h2>Room 01 walkthrough</h2></div><span class="count-badge">3 frames</span></div>
+      <p class="muted video-intro">Watch the local fixture here, then load its report above to inspect processing evidence.</p>
+      <label class="video-picker-label" for="video-room-select">Walkthrough area</label>
+      <select id="video-room-select" class="video-room-select">
+        <option value="room_01">Room 01</option>
+        <option value="room_02">Room 02</option>
+        <option value="room_03">Room 03</option>
+        <option value="connector">Connector</option>
+      </select>
+      <div class="media-stage">
+        <video id="walkthrough-video" class="media-video" controls preload="metadata">
+          <source id="walkthrough-source" src="../fixtures/video/room_01/room_01_walkthrough.mp4" type="video/mp4">
+          Your browser cannot play this video. Open the file with VLC or Windows Media Player.
+        </video>
+      </div>
+      <p class="fallback-label">H.264 MP4 preview served from the local project server.</p>
+    </section>
+
+    <footer><span>SpatialScan / local-only review</span><span id="updated-value">Demo data loaded</span></footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

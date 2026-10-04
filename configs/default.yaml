@@ -1,0 +1,15 @@
+# Reference settings for reproducible local runs.
+# These values document the current adapter defaults; the CLI does not load
+# this file yet.
+
+visual:
+  photo_confidence_half_width: 0.08
+  video_confidence_half_width: 0.03
+  photo_ceiling_half_width_m: 0.25
+  video_ceiling_half_width_m: 0.10
+
+lidar:
+  max_frames: 120
+  depth_min_m: 0.25
+  depth_max_m: 7.0
+  confidence_min: 1

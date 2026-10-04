@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "tier": "all",
+  "input": "sample reports / passing benchmark summary",
+  "score": 100,
+  "readiness": "READY_WITH_CAVEATS",
+  "checks": [
+    {"name": "lidar_ceiling_gate", "status": "PASS", "details": {"max_error_m": 0.009, "tolerance_m": 0.015}},
+    {"name": "photo_footprint_gate", "status": "PASS", "details": {"error_fraction": 0.06, "tolerance_fraction": 0.08}},
+    {"name": "video_footprint_gate", "status": "PASS", "details": {"error_fraction": 0.026, "tolerance_fraction": 0.03}},
+    {"name": "repeatability", "status": "PASS", "details": {"captures": 2}},
+    {"name": "incumbent_comparison", "status": "PASS", "details": {"shared_dimensions": 8, "our_wins": 6, "required_fraction": 0.7}}
+  ],
+  "recommendations": []
+}

@@ -1,0 +1,9 @@
+{
+  "rooms":[{
+    "id":"room_01",
+    "name":"Room 01",
+    "polygon_xy_m":[[0,0],[4,0],[4,3],[0,3]],
+    "floor_area_m2":{"value":12.0},
+    "ceiling_height_m":{"value":2.5}
+  }]
+}
