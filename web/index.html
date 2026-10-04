@@ -20,7 +20,6 @@
           <option value="photo">Calibrated photo quality</option>
           <option value="benchmark">Passing benchmark summary</option>
           <option value="multi-room">Multi-room reconstruction</option>
-          <option value="audit">Rubric evidence audit</option>
         </select>
         <button id="load-sample-button" class="quiet-button" type="button">Load sample</button>
         <button id="demo-button" class="quiet-button" type="button">Demo state</button>
@@ -72,12 +71,6 @@
     <section class="panel evidence-panel">
       <div class="panel-heading"><div><p class="eyebrow">EVIDENCE LEDGER</p><h2>What the pipeline can prove</h2></div><span id="check-count" class="count-badge">5 checks</span></div>
       <div id="checks" class="checks"></div>
-    </section>
-
-    <section id="rubric-panel" class="panel rubric-panel hidden">
-      <div class="panel-heading"><div><p class="eyebrow">SUBMISSION READINESS</p><h2>Scoring rubric evidence</h2></div><span id="rubric-score" class="count-badge">0 / 100 verified</span></div>
-      <p id="rubric-note" class="muted">This view separates implemented infrastructure from evidence that requires real measured captures.</p>
-      <div id="rubric-items" class="rubric-items"></div>
     </section>
 
     <section id="rooms-panel" class="panel rooms-panel hidden">

@@ -96,24 +96,7 @@ const multiRoomSample = {
   recommendations: ["Confirm room boundaries and openings against measured ground truth."]
 };
 
-const auditSample = {
-  tier: "rubric",
-  input: "benchmarks / submission audit",
-  score: 20,
-  readiness: "READY_FOR_COLLECTION",
-  rubric: [
-    { name: "walk_in", weight: 30, status: "BLOCKED", evidence: "0 real capture rows, 0 ground-truth rows", next_step: "Add real capture and laser/tape ground truth" },
-    { name: "fix_loop", weight: 25, status: "REVIEW", evidence: "Measured fixture ablation exists; laser/tape accuracy delta absent", next_step: "Add laser/tape ground truth and record before/after gate values" },
-    { name: "three_tier_accuracy", weight: 15, status: "BLOCKED", evidence: "No measured photo, video, or LiDAR rows", next_step: "Add all three measured tiers" },
-    { name: "compliance", weight: 10, status: "PASS", evidence: "Matrix and source artifacts present", next_step: "Keep partial items explicit" },
-    { name: "incumbent", weight: 10, status: "BLOCKED", evidence: "No incumbent export", next_step: "Preserve magicplan or Polycam export" },
-    { name: "capture_route", weight: 5, status: "PASS", evidence: "Protocol and cold-run script present", next_step: "Record non-engineer install time" },
-    { name: "process", weight: 5, status: "PASS", evidence: "CI and tests present", next_step: "Keep Git history auditable" }
-  ],
-  recommendations: ["Collect real benchmark evidence before claiming accuracy or selection readiness."]
-};
-
-const sampleReports = { video: demo, lidar: qualitySample, room: roomSample, photo: photoSample, benchmark: benchmarkSample, "multi-room": multiRoomSample, audit: auditSample };
+const sampleReports = { video: demo, lidar: qualitySample, room: roomSample, photo: photoSample, benchmark: benchmarkSample, "multi-room": multiRoomSample };
 
 const $ = (id) => document.getElementById(id);
 const pretty = (value) => typeof value === "object" ? JSON.stringify(value) : String(value ?? "");
@@ -133,7 +116,6 @@ function render(data) {
   const tier = String(data.tier ?? "unknown").toUpperCase();
   const checks = data.checks || [];
   const failed = checks.filter((check) => check.status !== "PASS");
-  const rubric = data.rubric || [];
   $("tier-value").textContent = tier;
   $("readiness-value").textContent = readiness;
   const reviewState = readiness === "REVIEW" || readiness === "READY_FOR_COLLECTION";
@@ -158,12 +140,6 @@ function render(data) {
   $("rooms-panel").classList.toggle("hidden", rooms.length === 0);
   $("rooms").innerHTML = rooms.map((room) => `<div class="room"><h3>${room.name || room.id}</h3><div class="room-row"><span>Floor area</span><strong>${room.floor_area_m2?.value ?? "-"} m²</strong></div><div class="room-row"><span>Ceiling</span><strong>${room.ceiling_height_m?.value ?? "-"} m</strong></div><div class="room-row"><span>Walls</span><strong>${room.walls?.length ?? 0}</strong></div></div>`).join("");
   $("updated-value").textContent = `Loaded ${tier.toLowerCase()} report`;
-  $("rubric-panel").classList.toggle("hidden", rubric.length === 0);
-  $("rubric-score").textContent = `${data.score ?? 0} / 100 verified`;
-  $("rubric-items").innerHTML = rubric.map((item) => {
-    const status = String(item.status || "REVIEW").toLowerCase();
-    return `<div class="rubric-item"><span class="rubric-name">${item.name.replaceAll("_", " ")} <small>(${item.weight}%)</small><span class="rubric-detail">${item.evidence}<br><b>Next:</b> ${item.next_step}</span></span><span class="rubric-status rubric-${status}">${item.status}</span></div>`;
-  }).join("");
 }
 
 async function loadFile(file) { render(JSON.parse(await file.text())); }

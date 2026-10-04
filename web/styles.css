@@ -66,7 +66,6 @@ h2 { margin-bottom: 0; font-size: 23px; line-height: 1.05; }
 .action-line { gap: 8px; color: #b7c6c0; font: 12px Arial, sans-serif; }
 .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--amber); }
 .evidence-panel, .rooms-panel { margin-top: 18px; }
-.rubric-panel { margin-top: 18px; }.rubric-items { margin-top: 18px; border-top: 1px solid var(--line); }.rubric-item { display: grid; grid-template-columns: 1fr auto; gap: 14px; padding: 13px 0; border-bottom: 1px solid var(--line); font-family: Arial, sans-serif; }.rubric-name { font-size: 13px; font-weight: 700; text-transform: capitalize; }.rubric-detail { display: block; margin-top: 4px; color: var(--muted); font-size: 11px; font-weight: 400; }.rubric-status { align-self: start; padding: 5px 7px; border-radius: 4px; font-size: 10px; font-weight: 700; }.rubric-pass { background: var(--teal-soft); color: var(--teal); }.rubric-review { background: var(--amber-soft); color: var(--amber); }.rubric-blocked { background: var(--red-soft); color: var(--red); }
 .count-badge { padding: 6px 9px; border-radius: 4px; background: var(--teal-soft); color: var(--teal); font: 700 10px Arial, sans-serif; }
 .checks { margin-top: 18px; border-top: 1px solid var(--line); }
 .check { display: grid; grid-template-columns: 18px 1fr auto; gap: 12px; align-items: center; padding: 13px 0; border-bottom: 1px solid var(--line); font-family: Arial, sans-serif; }
