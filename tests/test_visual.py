@@ -14,10 +14,14 @@ def test_visual_video_fixture_runs():
     assert result["device"]["images_used"] > 0
 
 
-def test_visual_scale_calibration_changes_footprint():
+def test_visual_scale_calibration_does_not_invent_unrectified_footprint():
     result = estimate_visual_plan(collect_images("fixtures/photo"), "photos", 0.01)
-    assert result["diagnostics"]["calibration_status"] == "DECLARED_SCALE_PER_PIXEL"
-    assert result["rooms"][0]["floor_area_m2"]["value"] > 1
+    scale = result["diagnostics"]["scale"]
+    assert result["diagnostics"]["calibration_status"] == "METRIC_SCALE_AVAILABLE_WITH_PLANE_LIMITS"
+    assert scale["source"] == "explicit_cli_calibration"
+    assert scale["metric_scale_is_global"] is False
+    # A pixel scale does not rectify perspective or provide a floor boundary.
+    assert result["rooms"][0]["floor_area_m2"]["value"] is None
 
 
 def test_visual_capture_groups_photo_room_folders(tmp_path):

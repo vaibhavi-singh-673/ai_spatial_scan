@@ -17,8 +17,11 @@ def test_quality_assesses_all_fixture_tiers():
 def test_quality_accepts_declared_visual_calibration():
     result = assess_capture("fixtures/video", "video", 0.01)
     checks = {check["name"]: check for check in result["checks"]}
-    assert result["readiness"] == "READY_WITH_CAVEATS"
+    # A scale calibration alone does not establish a rectified room boundary
+    # or an independently measured ceiling height.
+    assert result["readiness"] == "REVIEW"
     assert checks["metric_calibration_declared"]["status"] == "PASS"
+    assert checks["metric_room_geometry_available"]["status"] == "FAIL"
 
 
 def test_quality_output_is_json_serializable(tmp_path):
