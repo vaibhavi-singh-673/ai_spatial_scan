@@ -53,12 +53,26 @@
       "status": "FAIL",
       "weight": 20,
       "details": {
-        "reason": "Monocular scale requires a measured reference or calibration source"
+        "reason": "Sensor metadata alone cannot set absolute scale; add a measured reference.",
+        "status": "SCALE_UNRESOLVED",
+        "sensor_metadata": {}
+      },
+      "blocking": false
+    },
+    {
+      "name": "metric_room_geometry_available",
+      "status": "FAIL",
+      "weight": 0,
+      "details": {
+        "rectified_floor_boundary": false,
+        "direct_ceiling_reference": false,
+        "reason": "Metric room gates need a rectified floor boundary and direct height reference."
       },
       "blocking": false
     }
   ],
   "recommendations": [
-    "Add a measured scale reference before making metric accuracy claims."
+    "Add a measured scale reference before making metric accuracy claims.",
+    "Add rectified floor geometry and an independently measured ceiling height before reporting room metrics."
   ]
 }

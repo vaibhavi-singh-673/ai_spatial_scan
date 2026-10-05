@@ -1,9 +1,11 @@
 from pathlib import Path
 
 import cv2
+import json
 
 from .io.lidar import load_lidar
 from .tiers.visual import collect_images, collect_video_frames
+from .tiers.scale import estimate_scale
 
 
 VIDEO_SUFFIXES = {".mp4", ".mov", ".m4v", ".avi"}
@@ -19,7 +21,7 @@ def _check(name, passed, weight, details, blocking=False):
     }
 
 
-def _visual_quality(folder, tier, scale_m_per_pixel=None):
+def _visual_quality(folder, tier, scale_m_per_pixel=None, metadata_path=None):
     root = Path(folder)
     if tier == "video":
         files = sorted(
@@ -35,6 +37,7 @@ def _visual_quality(folder, tier, scale_m_per_pixel=None):
                    {"decoded_frames": len(frames), "minimum": 3}),
         ]
         sample = frames[0] if frames else None
+        calibration_images = files
     else:
         images = collect_images(root)
         decoded = [cv2.imread(str(path)) for path in images]
@@ -48,6 +51,22 @@ def _visual_quality(folder, tier, scale_m_per_pixel=None):
                    {"decoded_images": len(decoded), "recommended_range": [2, 8]}),
         ]
         sample = decoded[0] if decoded else None
+        calibration_images = images
+
+    scale = estimate_scale(calibration_images, scale_m_per_pixel, metadata_path)
+    metric_scale_ready = scale["scale_m_per_pixel"] is not None
+    metadata = {}
+    sidecar = Path(metadata_path) if metadata_path else (
+        Path(scale["metadata_path"]) if scale.get("metadata_path") else None)
+    if sidecar and sidecar.is_file():
+        try:
+            metadata = json.loads(sidecar.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            metadata = {}
+    metric_floor_ready = bool(metadata.get("floor_polygon_px") and (
+        metadata.get("floor_homography_image_to_m") or
+        (metadata.get("floor_polygon_is_rectified") is True and metric_scale_ready)))
+    metric_geometry_ready = metric_floor_ready and metadata.get("ceiling_height_m") is not None
 
     checks.append(_check(
         "usable_resolution",
@@ -57,11 +76,18 @@ def _visual_quality(folder, tier, scale_m_per_pixel=None):
     ))
     checks.append(_check(
         "metric_calibration_declared",
-        scale_m_per_pixel is not None and scale_m_per_pixel > 0,
+        metric_scale_ready,
         20,
-        {"scale_m_per_pixel": scale_m_per_pixel} if scale_m_per_pixel else
-        {"reason": "Monocular scale requires a measured reference or calibration source"},
+        {"scale_m_per_pixel": scale["scale_m_per_pixel"], "source": scale["source"],
+         "status": scale["status"], "metric_scale_is_global": scale["metric_scale_is_global"]}
+        if metric_scale_ready else
+        {"reason": "Sensor metadata alone cannot set absolute scale; add a measured reference.",
+         "status": scale["status"], "sensor_metadata": scale["sensor_metadata"]},
     ))
+    checks.append(_check("metric_room_geometry_available", metric_geometry_ready, 0,
+                         {"rectified_floor_boundary": metric_floor_ready,
+                          "direct_ceiling_reference": metadata.get("ceiling_height_m") is not None,
+                          "reason": "Metric room gates need a rectified floor boundary and direct height reference."}))
     return checks
 
 
@@ -95,11 +121,11 @@ def _lidar_quality(folder):
     return checks
 
 
-def assess_capture(folder, tier, scale_m_per_pixel=None):
+def assess_capture(folder, tier, scale_m_per_pixel=None, metadata_path=None):
     if tier not in {"photos", "video", "lidar"}:
         raise ValueError(f"Unsupported tier: {tier}")
     checks = (_lidar_quality(folder) if tier == "lidar"
-              else _visual_quality(folder, tier, scale_m_per_pixel))
+              else _visual_quality(folder, tier, scale_m_per_pixel, metadata_path))
     total_weight = sum(check["weight"] for check in checks)
     earned_weight = sum(check["weight"] for check in checks if check["status"] == "PASS")
     score = round(100 * earned_weight / total_weight) if total_weight else 0
@@ -108,9 +134,13 @@ def assess_capture(folder, tier, scale_m_per_pixel=None):
         check["name"] == "metric_calibration_declared" and check["status"] == "FAIL"
         for check in checks
     )
+    metric_geometry_missing = any(
+        check["name"] == "metric_room_geometry_available" and check["status"] == "FAIL"
+        for check in checks
+    )
     if blocking_failures:
         readiness = "BLOCKED"
-    elif calibration_missing:
+    elif calibration_missing or metric_geometry_missing:
         readiness = "REVIEW"
     elif score >= 80:
         readiness = "READY_WITH_CAVEATS"
@@ -119,8 +149,12 @@ def assess_capture(folder, tier, scale_m_per_pixel=None):
     recommendations = []
     if tier in {"photos", "video"} and calibration_missing:
         recommendations.append("Add a measured scale reference before making metric accuracy claims.")
+    if tier in {"photos", "video"} and metric_geometry_missing:
+        recommendations.append("Add rectified floor geometry and an independently measured ceiling height before reporting room metrics.")
     for check in checks:
-        if check["status"] == "FAIL" and check["name"] != "metric_calibration_declared":
+        if check["status"] == "FAIL" and check["name"] not in {
+            "metric_calibration_declared", "metric_room_geometry_available"
+        }:
             recommendations.append(f"Fix {check['name']}: {check['details']}.")
     return {
         "schema_version": "1.0",

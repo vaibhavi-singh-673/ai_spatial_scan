@@ -84,31 +84,47 @@ def evaluate(prediction, gt):
         gates["wall_length"] = _not_run("ordered wall measurements missing or incomplete")
 
     opening_errors = []
+    missed_openings = []
+    matched_predictions = set()
+    detected_predictions = []
     for rid in common:
         pred_openings = pr[rid].get("openings", [])
         gt_openings = gr[rid].get("openings", [])
         for index, expected in enumerate(gt_openings):
             actual = next((item for item in pred_openings
-                           if expected.get("id") and item.get("id") == expected.get("id")), None)
+                           if item.get("detected", True) and not item.get("candidate", False)
+                           and expected.get("id") and item.get("id") == expected.get("id")), None)
             if actual is None and index < len(pred_openings) and not expected.get("id"):
-                actual = pred_openings[index]
+                candidate = pred_openings[index]
+                actual = candidate if candidate.get("detected", True) and not candidate.get("candidate", False) else None
             if actual is None:
-                opening_errors.append(float("inf"))
+                opening_errors.append(None)
+                missed_openings.append({"room_id": rid, "opening_id": expected.get("id", f"opening_{index+1}")})
                 continue
+            matched_predictions.add(id(actual))
             actual_width = _value(actual.get("width"))
             truth_width = _value(expected.get("width"))
             if actual_width is not None and truth_width is not None:
                 opening_errors.append(abs(actual_width - truth_width))
             else:
-                opening_errors.append(float("inf"))
+                opening_errors.append(None)
         # Extra predicted openings count as false positives.
-        opening_errors.extend(float("inf") for _ in range(max(0, len(pred_openings) - len(gt_openings))))
+        detected_count = sum(item.get("detected", True) and not item.get("candidate", False)
+                             for item in pred_openings)
+        detected_predictions.extend((rid,item) for item in pred_openings
+                                    if item.get("detected", True) and not item.get("candidate", False))
+        opening_errors.extend(None for _ in range(max(0, detected_count - len(gt_openings))))
     if opening_errors:
-        passing = sum(error <= .02 for error in opening_errors)
+        passing = sum(error is not None and error <= .02 for error in opening_errors)
         fraction = passing / len(opening_errors)
         gates["opening_width"] = {"count": len(opening_errors), "within_2_cm": passing,
                                   "fraction_within_tolerance": fraction, "status": _status(fraction >= .85),
-                                  "tolerance_m": .02, "required_fraction": .85}
+                                  "tolerance_m": .02, "required_fraction": .85,
+                                  "missed_openings": missed_openings,
+                                  "phantom_openings": [{"room_id":rid,"opening_id":item.get("id")}
+                                      for rid,item in detected_predictions if id(item) not in matched_predictions],
+                                  "unverified_candidates": sum(bool(item.get("candidate")) for rid in common
+                                      for item in pr[rid].get("openings",[]))}
     else:
         gates["opening_width"] = _not_run("matched opening width measurements missing")
 

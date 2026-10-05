@@ -1,0 +1,110 @@
+{
+  "schema_version": "1.0",
+  "status": "READY",
+  "python": "3.12.3",
+  "checks": [
+    {
+      "name": "python",
+      "status": "READY",
+      "details": {
+        "version": "3.12.3",
+        "required": ">=3.11"
+      }
+    },
+    {
+      "name": "dependencies",
+      "status": "READY",
+      "details": {
+        "numpy": true,
+        "opencv": true,
+        "pillow": true,
+        "scipy": true,
+        "shapely": true,
+        "matplotlib": true,
+        "pydantic": true,
+        "pyyaml": true
+      }
+    },
+    {
+      "name": "opencv_still_decoder",
+      "status": "READY",
+      "details": {
+        "version": "5.0.0",
+        "encode_decode": true
+      }
+    },
+    {
+      "name": "opencv_video_decoder",
+      "status": "READY",
+      "details": {
+        "fixture": "C:\\Users\\vaibhavi\\Desktop\\YC\\ai_spatial_solution\\fixtures\\video\\connector\\connector_walkthrough.mp4",
+        "first_frame_decoded": true
+      }
+    },
+    {
+      "name": "configuration",
+      "status": "READY",
+      "details": {
+        "path": "C:\\Users\\vaibhavi\\Desktop\\YC\\ai_spatial_solution\\configs\\default.yaml",
+        "valid_yaml": true,
+        "error": null
+      }
+    },
+    {
+      "name": "lidar_tier",
+      "status": "READY",
+      "details": {
+        "fixture_metadata_present": true,
+        "frame_sampling_limit": 120
+      }
+    },
+    {
+      "name": "photo_tier",
+      "status": "READY",
+      "details": {
+        "still_decoder_ready": true
+      }
+    },
+    {
+      "name": "video_tier",
+      "status": "READY",
+      "details": {
+        "video_decoder_ready": true
+      }
+    },
+    {
+      "name": "models",
+      "status": "READY",
+      "details": {
+        "required": false,
+        "available": [],
+        "note": "Current pipeline is model-free; geometric CV paths are used."
+      }
+    },
+    {
+      "name": "output",
+      "status": "READY",
+      "details": {
+        "path": "C:\\Users\\vaibhavi\\Desktop\\YC\\ai_spatial_solution\\runs\\doctor",
+        "writable": true,
+        "error": null
+      }
+    },
+    {
+      "name": "report",
+      "status": "READY",
+      "details": {
+        "matplotlib_available": true,
+        "png_and_html_write": true
+      }
+    }
+  ],
+  "blocked": [],
+  "tiers": {
+    "PHOTO": "READY",
+    "VIDEO": "READY",
+    "LIDAR": "READY",
+    "OUTPUT": "READY",
+    "REPORT": "READY"
+  }
+}

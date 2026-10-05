@@ -3,7 +3,7 @@
   "capture_id": "photos_capture_4_rooms",
   "tier": "photos",
   "device": {
-    "source": "iPhone stills/video",
+    "source": "visual capture; device metadata not inferred",
     "images_used": 7,
     "frame_width_px": 900,
     "frame_height_px": 500,
@@ -13,210 +13,1042 @@
     {
       "id": "connector",
       "name": "Connector",
-      "polygon_xy_m": [
-        [
-          0,
-          0
-        ],
-        [
-          9.0,
-          0
-        ],
-        [
-          9.0,
-          5.0
-        ],
-        [
-          0,
-          5.0
-        ]
-      ],
+      "polygon_xy_m": [],
       "floor_area_m2": {
         "id": "floor_area",
         "kind": "floor_area",
         "room_id": "connector",
-        "value": 45.0,
+        "value": null,
         "unit": "m2",
-        "interval": {
-          "estimate_m": 45.0,
-          "low_m": 44.92,
-          "high_m": 45.08,
-          "confidence": 0.95,
-          "method": "visual calibration interval"
-        }
+        "interval": null,
+        "status": "NOT_ESTIMATED"
       },
       "ceiling_height_m": {
         "id": "ceiling_height",
         "kind": "ceiling_height",
         "room_id": "connector",
-        "value": 2.5,
+        "value": null,
         "unit": "m",
-        "interval": {
-          "estimate_m": 2.5,
-          "low_m": 2.25,
-          "high_m": 2.75,
-          "confidence": 0.95,
-          "method": "visual calibration interval"
-        }
+        "interval": null,
+        "status": "NOT_ESTIMATED"
       },
       "walls": [],
-      "openings": []
+      "openings": [
+        {
+          "id": "opening_candidate_1",
+          "room_id": "connector",
+          "type": "door_candidate",
+          "width": {
+            "id": "opening_candidate_1",
+            "kind": "opening_width",
+            "room_id": "connector",
+            "value": 1.07,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.70448,
+          "review_required": true,
+          "image_bbox_px": [
+            79,
+            91,
+            186,
+            409
+          ]
+        },
+        {
+          "id": "opening_candidate_2",
+          "room_id": "connector",
+          "type": "door_candidate",
+          "width": {
+            "id": "opening_candidate_2",
+            "kind": "opening_width",
+            "room_id": "connector",
+            "value": 0.9500000000000001,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.70448,
+          "review_required": true,
+          "image_bbox_px": [
+            79,
+            91,
+            174,
+            409
+          ]
+        },
+        {
+          "id": "opening_candidate_3",
+          "room_id": "connector",
+          "type": "door_candidate",
+          "width": {
+            "id": "opening_candidate_3",
+            "kind": "opening_width",
+            "room_id": "connector",
+            "value": 1.86,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.7048399999999999,
+          "review_required": true,
+          "image_bbox_px": [
+            634,
+            90,
+            820,
+            409
+          ]
+        },
+        {
+          "id": "opening_candidate_4",
+          "room_id": "connector",
+          "type": "door_candidate",
+          "width": {
+            "id": "opening_candidate_4",
+            "kind": "opening_width",
+            "room_id": "connector",
+            "value": 1.74,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.7048399999999999,
+          "review_required": true,
+          "image_bbox_px": [
+            646,
+            90,
+            820,
+            409
+          ]
+        },
+        {
+          "id": "opening_candidate_5",
+          "room_id": "connector",
+          "type": "door_candidate",
+          "width": {
+            "id": "opening_candidate_5",
+            "kind": "opening_width",
+            "room_id": "connector",
+            "value": 1.41,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.6990799999999999,
+          "review_required": true,
+          "image_bbox_px": [
+            671,
+            98,
+            812,
+            401
+          ]
+        },
+        {
+          "id": "opening_candidate_6",
+          "room_id": "connector",
+          "type": "door_candidate",
+          "width": {
+            "id": "opening_candidate_6",
+            "kind": "opening_width",
+            "room_id": "connector",
+            "value": 1.32,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.70448,
+          "review_required": true,
+          "image_bbox_px": [
+            79,
+            91,
+            211,
+            409
+          ]
+        },
+        {
+          "id": "opening_candidate_7",
+          "room_id": "connector",
+          "type": "door_candidate",
+          "width": {
+            "id": "opening_candidate_7",
+            "kind": "opening_width",
+            "room_id": "connector",
+            "value": 1.2,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.70448,
+          "review_required": true,
+          "image_bbox_px": [
+            79,
+            91,
+            199,
+            409
+          ]
+        },
+        {
+          "id": "opening_candidate_8",
+          "room_id": "connector",
+          "type": "door_candidate",
+          "width": {
+            "id": "opening_candidate_8",
+            "kind": "opening_width",
+            "room_id": "connector",
+            "value": 1.53,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.6990799999999999,
+          "review_required": true,
+          "image_bbox_px": [
+            659,
+            98,
+            812,
+            401
+          ]
+        }
+      ]
     },
     {
       "id": "room_01",
       "name": "Room 01",
-      "polygon_xy_m": [
-        [
-          0,
-          0
-        ],
-        [
-          14.4,
-          0
-        ],
-        [
-          14.4,
-          10.8
-        ],
-        [
-          0,
-          10.8
-        ]
-      ],
+      "polygon_xy_m": [],
       "floor_area_m2": {
         "id": "floor_area",
         "kind": "floor_area",
         "room_id": "room_01",
-        "value": 155.52,
+        "value": null,
         "unit": "m2",
-        "interval": {
-          "estimate_m": 155.52,
-          "low_m": 155.44,
-          "high_m": 155.60000000000002,
-          "confidence": 0.95,
-          "method": "visual calibration interval"
-        }
+        "interval": null,
+        "status": "NOT_ESTIMATED"
       },
       "ceiling_height_m": {
         "id": "ceiling_height",
         "kind": "ceiling_height",
         "room_id": "room_01",
-        "value": 2.5,
+        "value": null,
         "unit": "m",
-        "interval": {
-          "estimate_m": 2.5,
-          "low_m": 2.25,
-          "high_m": 2.75,
-          "confidence": 0.95,
-          "method": "visual calibration interval"
-        }
+        "interval": null,
+        "status": "NOT_ESTIMATED"
       },
       "walls": [],
-      "openings": []
+      "openings": [
+        {
+          "id": "opening_candidate_1",
+          "room_id": "room_01",
+          "type": "window_candidate",
+          "width": {
+            "id": "opening_candidate_1",
+            "kind": "opening_width",
+            "room_id": "room_01",
+            "value": 5.1000000000000005,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.7,
+          "review_required": true,
+          "image_bbox_px": [
+            855,
+            214,
+            1365,
+            874
+          ]
+        },
+        {
+          "id": "opening_candidate_2",
+          "room_id": "room_01",
+          "type": "window_candidate",
+          "width": {
+            "id": "opening_candidate_2",
+            "kind": "opening_width",
+            "room_id": "room_01",
+            "value": 5.1000000000000005,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.7,
+          "review_required": true,
+          "image_bbox_px": [
+            345,
+            214,
+            855,
+            874
+          ]
+        },
+        {
+          "id": "opening_candidate_3",
+          "room_id": "room_01",
+          "type": "door_candidate",
+          "width": {
+            "id": "opening_candidate_3",
+            "kind": "opening_width",
+            "room_id": "room_01",
+            "value": 2.5500000000000003,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.7,
+          "review_required": true,
+          "image_bbox_px": [
+            855,
+            214,
+            1110,
+            874
+          ]
+        },
+        {
+          "id": "opening_candidate_4",
+          "room_id": "room_01",
+          "type": "door_candidate",
+          "width": {
+            "id": "opening_candidate_4",
+            "kind": "opening_width",
+            "room_id": "room_01",
+            "value": 2.5500000000000003,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.7,
+          "review_required": true,
+          "image_bbox_px": [
+            600,
+            214,
+            855,
+            874
+          ]
+        },
+        {
+          "id": "opening_candidate_5",
+          "room_id": "room_01",
+          "type": "door_candidate",
+          "width": {
+            "id": "opening_candidate_5",
+            "kind": "opening_width",
+            "room_id": "room_01",
+            "value": 2.5500000000000003,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.7048333333333333,
+          "review_required": true,
+          "image_bbox_px": [
+            1110,
+            214,
+            1365,
+            903
+          ]
+        },
+        {
+          "id": "opening_candidate_6",
+          "room_id": "room_01",
+          "type": "door_candidate",
+          "width": {
+            "id": "opening_candidate_6",
+            "kind": "opening_width",
+            "room_id": "room_01",
+            "value": 2.06,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.6988333333333333,
+          "review_required": true,
+          "image_bbox_px": [
+            139,
+            214,
+            345,
+            866
+          ]
+        },
+        {
+          "id": "opening_candidate_7",
+          "room_id": "room_01",
+          "type": "window_candidate",
+          "width": {
+            "id": "opening_candidate_7",
+            "kind": "opening_width",
+            "room_id": "room_01",
+            "value": 4.61,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.6988333333333333,
+          "review_required": true,
+          "image_bbox_px": [
+            139,
+            214,
+            600,
+            866
+          ]
+        },
+        {
+          "id": "opening_candidate_8",
+          "room_id": "room_01",
+          "type": "door_candidate",
+          "width": {
+            "id": "opening_candidate_8",
+            "kind": "opening_width",
+            "room_id": "room_01",
+            "value": 2.5500000000000003,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.7,
+          "review_required": true,
+          "image_bbox_px": [
+            345,
+            214,
+            600,
+            874
+          ]
+        },
+        {
+          "id": "opening_candidate_9",
+          "room_id": "room_01",
+          "type": "door_candidate",
+          "width": {
+            "id": "opening_candidate_9",
+            "kind": "opening_width",
+            "room_id": "room_01",
+            "value": 3.0100000000000002,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.6983333333333333,
+          "review_required": true,
+          "image_bbox_px": [
+            1110,
+            214,
+            1411,
+            864
+          ]
+        },
+        {
+          "id": "opening_candidate_10",
+          "room_id": "room_01",
+          "type": "window_candidate",
+          "width": {
+            "id": "opening_candidate_10",
+            "kind": "opening_width",
+            "room_id": "room_01",
+            "value": 5.1000000000000005,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.7,
+          "review_required": true,
+          "image_bbox_px": [
+            600,
+            214,
+            1110,
+            874
+          ]
+        }
+      ]
     },
     {
       "id": "room_02",
       "name": "Room 02",
-      "polygon_xy_m": [
-        [
-          0,
-          0
-        ],
-        [
-          12.0,
-          0
-        ],
-        [
-          12.0,
-          8.0
-        ],
-        [
-          0,
-          8.0
-        ]
-      ],
+      "polygon_xy_m": [],
       "floor_area_m2": {
         "id": "floor_area",
         "kind": "floor_area",
         "room_id": "room_02",
-        "value": 96.0,
+        "value": null,
         "unit": "m2",
-        "interval": {
-          "estimate_m": 96.0,
-          "low_m": 95.92,
-          "high_m": 96.08,
-          "confidence": 0.95,
-          "method": "visual calibration interval"
-        }
+        "interval": null,
+        "status": "NOT_ESTIMATED"
       },
       "ceiling_height_m": {
         "id": "ceiling_height",
         "kind": "ceiling_height",
         "room_id": "room_02",
-        "value": 2.5,
+        "value": null,
         "unit": "m",
-        "interval": {
-          "estimate_m": 2.5,
-          "low_m": 2.25,
-          "high_m": 2.75,
-          "confidence": 0.95,
-          "method": "visual calibration interval"
-        }
+        "interval": null,
+        "status": "NOT_ESTIMATED"
       },
       "walls": [],
-      "openings": []
+      "openings": [
+        {
+          "id": "opening_candidate_1",
+          "room_id": "room_02",
+          "type": "door_candidate",
+          "width": {
+            "id": "opening_candidate_1",
+            "kind": "opening_width",
+            "room_id": "room_02",
+            "value": 0.86,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.45439999999999997,
+          "review_required": true,
+          "image_bbox_px": [
+            79,
+            148,
+            165,
+            612
+          ]
+        },
+        {
+          "id": "opening_candidate_2",
+          "room_id": "room_02",
+          "type": "window_candidate",
+          "width": {
+            "id": "opening_candidate_2",
+            "kind": "opening_width",
+            "room_id": "room_02",
+            "value": 3.2600000000000002,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.39769999999999994,
+          "review_required": true,
+          "image_bbox_px": [
+            766,
+            148,
+            1092,
+            360
+          ]
+        },
+        {
+          "id": "opening_candidate_3",
+          "room_id": "room_02",
+          "type": "window_candidate",
+          "width": {
+            "id": "opening_candidate_3",
+            "kind": "opening_width",
+            "room_id": "room_02",
+            "value": 2.8000000000000003,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.6376999999999999,
+          "review_required": true,
+          "image_bbox_px": [
+            766,
+            148,
+            1046,
+            360
+          ]
+        },
+        {
+          "id": "opening_candidate_4",
+          "room_id": "room_02",
+          "type": "window_candidate",
+          "width": {
+            "id": "opening_candidate_4",
+            "kind": "opening_width",
+            "room_id": "room_02",
+            "value": 2.92,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.6376999999999999,
+          "review_required": true,
+          "image_bbox_px": [
+            754,
+            147,
+            1046,
+            359
+          ]
+        },
+        {
+          "id": "opening_candidate_5",
+          "room_id": "room_02",
+          "type": "window_candidate",
+          "width": {
+            "id": "opening_candidate_5",
+            "kind": "opening_width",
+            "room_id": "room_02",
+            "value": 2.68,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.6376999999999999,
+          "review_required": true,
+          "image_bbox_px": [
+            766,
+            148,
+            1034,
+            360
+          ]
+        },
+        {
+          "id": "opening_candidate_6",
+          "room_id": "room_02",
+          "type": "window_candidate",
+          "width": {
+            "id": "opening_candidate_6",
+            "kind": "opening_width",
+            "room_id": "room_02",
+            "value": 2.8000000000000003,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.6376999999999999,
+          "review_required": true,
+          "image_bbox_px": [
+            754,
+            147,
+            1034,
+            359
+          ]
+        }
+      ]
     },
     {
       "id": "room_03",
       "name": "Room 03",
-      "polygon_xy_m": [
-        [
-          0,
-          0
-        ],
-        [
-          11.0,
-          0
-        ],
-        [
-          11.0,
-          7.6000000000000005
-        ],
-        [
-          0,
-          7.6000000000000005
-        ]
-      ],
+      "polygon_xy_m": [],
       "floor_area_m2": {
         "id": "floor_area",
         "kind": "floor_area",
         "room_id": "room_03",
-        "value": 83.60000000000001,
+        "value": null,
         "unit": "m2",
-        "interval": {
-          "estimate_m": 83.60000000000001,
-          "low_m": 83.52000000000001,
-          "high_m": 83.68,
-          "confidence": 0.95,
-          "method": "visual calibration interval"
-        }
+        "interval": null,
+        "status": "NOT_ESTIMATED"
       },
       "ceiling_height_m": {
         "id": "ceiling_height",
         "kind": "ceiling_height",
         "room_id": "room_03",
-        "value": 2.5,
+        "value": null,
         "unit": "m",
-        "interval": {
-          "estimate_m": 2.5,
-          "low_m": 2.25,
-          "high_m": 2.75,
-          "confidence": 0.95,
-          "method": "visual calibration interval"
-        }
+        "interval": null,
+        "status": "NOT_ESTIMATED"
       },
       "walls": [],
-      "openings": []
+      "openings": [
+        {
+          "id": "opening_candidate_1",
+          "room_id": "room_03",
+          "type": "door_candidate",
+          "width": {
+            "id": "opening_candidate_1",
+            "kind": "opening_width",
+            "room_id": "room_03",
+            "value": 0.98,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.4364473684210526,
+          "review_required": true,
+          "image_bbox_px": [
+            894,
+            187,
+            992,
+            552
+          ]
+        },
+        {
+          "id": "opening_candidate_2",
+          "room_id": "room_03",
+          "type": "door_candidate",
+          "width": {
+            "id": "opening_candidate_2",
+            "kind": "opening_width",
+            "room_id": "room_03",
+            "value": 0.86,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.43999999999999995,
+          "review_required": true,
+          "image_bbox_px": [
+            906,
+            180,
+            992,
+            560
+          ]
+        },
+        {
+          "id": "opening_candidate_3",
+          "room_id": "room_03",
+          "type": "door_candidate",
+          "width": {
+            "id": "opening_candidate_3",
+            "kind": "opening_width",
+            "room_id": "room_03",
+            "value": 0.78,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.43621052631578944,
+          "review_required": true,
+          "image_bbox_px": [
+            107,
+            188,
+            185,
+            552
+          ]
+        },
+        {
+          "id": "opening_candidate_4",
+          "room_id": "room_03",
+          "type": "door_candidate",
+          "width": {
+            "id": "opening_candidate_4",
+            "kind": "opening_width",
+            "room_id": "room_03",
+            "value": 0.74,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.43952631578947365,
+          "review_required": true,
+          "image_bbox_px": [
+            99,
+            181,
+            173,
+            559
+          ]
+        },
+        {
+          "id": "opening_candidate_5",
+          "room_id": "room_03",
+          "type": "window_candidate",
+          "width": {
+            "id": "opening_candidate_5",
+            "kind": "opening_width",
+            "room_id": "room_03",
+            "value": 3.29,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.6449473684210526,
+          "review_required": true,
+          "image_bbox_px": [
+            185,
+            188,
+            514,
+            419
+          ]
+        },
+        {
+          "id": "opening_candidate_6",
+          "room_id": "room_03",
+          "type": "window_candidate",
+          "width": {
+            "id": "opening_candidate_6",
+            "kind": "opening_width",
+            "room_id": "room_03",
+            "value": 3.41,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.6449473684210526,
+          "review_required": true,
+          "image_bbox_px": [
+            185,
+            188,
+            526,
+            420
+          ]
+        },
+        {
+          "id": "opening_candidate_7",
+          "room_id": "room_03",
+          "type": "window_candidate",
+          "width": {
+            "id": "opening_candidate_7",
+            "kind": "opening_width",
+            "room_id": "room_03",
+            "value": 3.41,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.6449473684210526,
+          "review_required": true,
+          "image_bbox_px": [
+            173,
+            187,
+            514,
+            419
+          ]
+        },
+        {
+          "id": "opening_candidate_8",
+          "room_id": "room_03",
+          "type": "window_candidate",
+          "width": {
+            "id": "opening_candidate_8",
+            "kind": "opening_width",
+            "room_id": "room_03",
+            "value": 3.5300000000000002,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.6449473684210526,
+          "review_required": true,
+          "image_bbox_px": [
+            173,
+            188,
+            526,
+            420
+          ]
+        },
+        {
+          "id": "opening_candidate_9",
+          "room_id": "room_03",
+          "type": "door_candidate",
+          "width": {
+            "id": "opening_candidate_9",
+            "kind": "opening_width",
+            "room_id": "room_03",
+            "value": 0.73,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.4364473684210526,
+          "review_required": true,
+          "image_bbox_px": [
+            919,
+            187,
+            992,
+            552
+          ]
+        },
+        {
+          "id": "opening_candidate_10",
+          "room_id": "room_03",
+          "type": "door_candidate",
+          "width": {
+            "id": "opening_candidate_10",
+            "kind": "opening_width",
+            "room_id": "room_03",
+            "value": 1.03,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.43621052631578944,
+          "review_required": true,
+          "image_bbox_px": [
+            107,
+            188,
+            210,
+            552
+          ]
+        },
+        {
+          "id": "opening_candidate_11",
+          "room_id": "room_03",
+          "type": "door_candidate",
+          "width": {
+            "id": "opening_candidate_11",
+            "kind": "opening_width",
+            "room_id": "room_03",
+            "value": 0.91,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.43952631578947365,
+          "review_required": true,
+          "image_bbox_px": [
+            107,
+            181,
+            198,
+            559
+          ]
+        },
+        {
+          "id": "opening_candidate_12",
+          "room_id": "room_03",
+          "type": "window_candidate",
+          "width": {
+            "id": "opening_candidate_12",
+            "kind": "opening_width",
+            "room_id": "room_03",
+            "value": 3.29,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.6449473684210526,
+          "review_required": true,
+          "image_bbox_px": [
+            210,
+            188,
+            539,
+            419
+          ]
+        },
+        {
+          "id": "opening_candidate_13",
+          "room_id": "room_03",
+          "type": "window_candidate",
+          "width": {
+            "id": "opening_candidate_13",
+            "kind": "opening_width",
+            "room_id": "room_03",
+            "value": 3.41,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.6449473684210526,
+          "review_required": true,
+          "image_bbox_px": [
+            210,
+            188,
+            551,
+            420
+          ]
+        },
+        {
+          "id": "opening_candidate_14",
+          "room_id": "room_03",
+          "type": "window_candidate",
+          "width": {
+            "id": "opening_candidate_14",
+            "kind": "opening_width",
+            "room_id": "room_03",
+            "value": 3.41,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.6449473684210526,
+          "review_required": true,
+          "image_bbox_px": [
+            198,
+            187,
+            539,
+            419
+          ]
+        },
+        {
+          "id": "opening_candidate_15",
+          "room_id": "room_03",
+          "type": "window_candidate",
+          "width": {
+            "id": "opening_candidate_15",
+            "kind": "opening_width",
+            "room_id": "room_03",
+            "value": 3.5300000000000002,
+            "unit": "m",
+            "interval": null,
+            "uncertainty_status": "NOT_QUANTIFIED"
+          },
+          "detected": false,
+          "candidate": true,
+          "confidence": 0.6449473684210526,
+          "review_required": true,
+          "image_bbox_px": [
+            198,
+            188,
+            551,
+            420
+          ]
+        }
+      ]
     }
   ],
   "plan": {
@@ -224,233 +1056,1064 @@
       {
         "id": "connector",
         "name": "Connector",
-        "polygon_xy_m": [
-          [
-            0,
-            0
-          ],
-          [
-            9.0,
-            0
-          ],
-          [
-            9.0,
-            5.0
-          ],
-          [
-            0,
-            5.0
-          ]
-        ],
+        "polygon_xy_m": [],
         "floor_area_m2": {
           "id": "floor_area",
           "kind": "floor_area",
           "room_id": "connector",
-          "value": 45.0,
+          "value": null,
           "unit": "m2",
-          "interval": {
-            "estimate_m": 45.0,
-            "low_m": 44.92,
-            "high_m": 45.08,
-            "confidence": 0.95,
-            "method": "visual calibration interval"
-          }
+          "interval": null,
+          "status": "NOT_ESTIMATED"
         },
         "ceiling_height_m": {
           "id": "ceiling_height",
           "kind": "ceiling_height",
           "room_id": "connector",
-          "value": 2.5,
+          "value": null,
           "unit": "m",
-          "interval": {
-            "estimate_m": 2.5,
-            "low_m": 2.25,
-            "high_m": 2.75,
-            "confidence": 0.95,
-            "method": "visual calibration interval"
-          }
+          "interval": null,
+          "status": "NOT_ESTIMATED"
         },
         "walls": [],
-        "openings": []
+        "openings": [
+          {
+            "id": "opening_candidate_1",
+            "room_id": "connector",
+            "type": "door_candidate",
+            "width": {
+              "id": "opening_candidate_1",
+              "kind": "opening_width",
+              "room_id": "connector",
+              "value": 1.07,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.70448,
+            "review_required": true,
+            "image_bbox_px": [
+              79,
+              91,
+              186,
+              409
+            ]
+          },
+          {
+            "id": "opening_candidate_2",
+            "room_id": "connector",
+            "type": "door_candidate",
+            "width": {
+              "id": "opening_candidate_2",
+              "kind": "opening_width",
+              "room_id": "connector",
+              "value": 0.9500000000000001,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.70448,
+            "review_required": true,
+            "image_bbox_px": [
+              79,
+              91,
+              174,
+              409
+            ]
+          },
+          {
+            "id": "opening_candidate_3",
+            "room_id": "connector",
+            "type": "door_candidate",
+            "width": {
+              "id": "opening_candidate_3",
+              "kind": "opening_width",
+              "room_id": "connector",
+              "value": 1.86,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.7048399999999999,
+            "review_required": true,
+            "image_bbox_px": [
+              634,
+              90,
+              820,
+              409
+            ]
+          },
+          {
+            "id": "opening_candidate_4",
+            "room_id": "connector",
+            "type": "door_candidate",
+            "width": {
+              "id": "opening_candidate_4",
+              "kind": "opening_width",
+              "room_id": "connector",
+              "value": 1.74,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.7048399999999999,
+            "review_required": true,
+            "image_bbox_px": [
+              646,
+              90,
+              820,
+              409
+            ]
+          },
+          {
+            "id": "opening_candidate_5",
+            "room_id": "connector",
+            "type": "door_candidate",
+            "width": {
+              "id": "opening_candidate_5",
+              "kind": "opening_width",
+              "room_id": "connector",
+              "value": 1.41,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.6990799999999999,
+            "review_required": true,
+            "image_bbox_px": [
+              671,
+              98,
+              812,
+              401
+            ]
+          },
+          {
+            "id": "opening_candidate_6",
+            "room_id": "connector",
+            "type": "door_candidate",
+            "width": {
+              "id": "opening_candidate_6",
+              "kind": "opening_width",
+              "room_id": "connector",
+              "value": 1.32,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.70448,
+            "review_required": true,
+            "image_bbox_px": [
+              79,
+              91,
+              211,
+              409
+            ]
+          },
+          {
+            "id": "opening_candidate_7",
+            "room_id": "connector",
+            "type": "door_candidate",
+            "width": {
+              "id": "opening_candidate_7",
+              "kind": "opening_width",
+              "room_id": "connector",
+              "value": 1.2,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.70448,
+            "review_required": true,
+            "image_bbox_px": [
+              79,
+              91,
+              199,
+              409
+            ]
+          },
+          {
+            "id": "opening_candidate_8",
+            "room_id": "connector",
+            "type": "door_candidate",
+            "width": {
+              "id": "opening_candidate_8",
+              "kind": "opening_width",
+              "room_id": "connector",
+              "value": 1.53,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.6990799999999999,
+            "review_required": true,
+            "image_bbox_px": [
+              659,
+              98,
+              812,
+              401
+            ]
+          }
+        ]
       },
       {
         "id": "room_01",
         "name": "Room 01",
-        "polygon_xy_m": [
-          [
-            0,
-            0
-          ],
-          [
-            14.4,
-            0
-          ],
-          [
-            14.4,
-            10.8
-          ],
-          [
-            0,
-            10.8
-          ]
-        ],
+        "polygon_xy_m": [],
         "floor_area_m2": {
           "id": "floor_area",
           "kind": "floor_area",
           "room_id": "room_01",
-          "value": 155.52,
+          "value": null,
           "unit": "m2",
-          "interval": {
-            "estimate_m": 155.52,
-            "low_m": 155.44,
-            "high_m": 155.60000000000002,
-            "confidence": 0.95,
-            "method": "visual calibration interval"
-          }
+          "interval": null,
+          "status": "NOT_ESTIMATED"
         },
         "ceiling_height_m": {
           "id": "ceiling_height",
           "kind": "ceiling_height",
           "room_id": "room_01",
-          "value": 2.5,
+          "value": null,
           "unit": "m",
-          "interval": {
-            "estimate_m": 2.5,
-            "low_m": 2.25,
-            "high_m": 2.75,
-            "confidence": 0.95,
-            "method": "visual calibration interval"
-          }
+          "interval": null,
+          "status": "NOT_ESTIMATED"
         },
         "walls": [],
-        "openings": []
+        "openings": [
+          {
+            "id": "opening_candidate_1",
+            "room_id": "room_01",
+            "type": "window_candidate",
+            "width": {
+              "id": "opening_candidate_1",
+              "kind": "opening_width",
+              "room_id": "room_01",
+              "value": 5.1000000000000005,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.7,
+            "review_required": true,
+            "image_bbox_px": [
+              855,
+              214,
+              1365,
+              874
+            ]
+          },
+          {
+            "id": "opening_candidate_2",
+            "room_id": "room_01",
+            "type": "window_candidate",
+            "width": {
+              "id": "opening_candidate_2",
+              "kind": "opening_width",
+              "room_id": "room_01",
+              "value": 5.1000000000000005,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.7,
+            "review_required": true,
+            "image_bbox_px": [
+              345,
+              214,
+              855,
+              874
+            ]
+          },
+          {
+            "id": "opening_candidate_3",
+            "room_id": "room_01",
+            "type": "door_candidate",
+            "width": {
+              "id": "opening_candidate_3",
+              "kind": "opening_width",
+              "room_id": "room_01",
+              "value": 2.5500000000000003,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.7,
+            "review_required": true,
+            "image_bbox_px": [
+              855,
+              214,
+              1110,
+              874
+            ]
+          },
+          {
+            "id": "opening_candidate_4",
+            "room_id": "room_01",
+            "type": "door_candidate",
+            "width": {
+              "id": "opening_candidate_4",
+              "kind": "opening_width",
+              "room_id": "room_01",
+              "value": 2.5500000000000003,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.7,
+            "review_required": true,
+            "image_bbox_px": [
+              600,
+              214,
+              855,
+              874
+            ]
+          },
+          {
+            "id": "opening_candidate_5",
+            "room_id": "room_01",
+            "type": "door_candidate",
+            "width": {
+              "id": "opening_candidate_5",
+              "kind": "opening_width",
+              "room_id": "room_01",
+              "value": 2.5500000000000003,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.7048333333333333,
+            "review_required": true,
+            "image_bbox_px": [
+              1110,
+              214,
+              1365,
+              903
+            ]
+          },
+          {
+            "id": "opening_candidate_6",
+            "room_id": "room_01",
+            "type": "door_candidate",
+            "width": {
+              "id": "opening_candidate_6",
+              "kind": "opening_width",
+              "room_id": "room_01",
+              "value": 2.06,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.6988333333333333,
+            "review_required": true,
+            "image_bbox_px": [
+              139,
+              214,
+              345,
+              866
+            ]
+          },
+          {
+            "id": "opening_candidate_7",
+            "room_id": "room_01",
+            "type": "window_candidate",
+            "width": {
+              "id": "opening_candidate_7",
+              "kind": "opening_width",
+              "room_id": "room_01",
+              "value": 4.61,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.6988333333333333,
+            "review_required": true,
+            "image_bbox_px": [
+              139,
+              214,
+              600,
+              866
+            ]
+          },
+          {
+            "id": "opening_candidate_8",
+            "room_id": "room_01",
+            "type": "door_candidate",
+            "width": {
+              "id": "opening_candidate_8",
+              "kind": "opening_width",
+              "room_id": "room_01",
+              "value": 2.5500000000000003,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.7,
+            "review_required": true,
+            "image_bbox_px": [
+              345,
+              214,
+              600,
+              874
+            ]
+          },
+          {
+            "id": "opening_candidate_9",
+            "room_id": "room_01",
+            "type": "door_candidate",
+            "width": {
+              "id": "opening_candidate_9",
+              "kind": "opening_width",
+              "room_id": "room_01",
+              "value": 3.0100000000000002,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.6983333333333333,
+            "review_required": true,
+            "image_bbox_px": [
+              1110,
+              214,
+              1411,
+              864
+            ]
+          },
+          {
+            "id": "opening_candidate_10",
+            "room_id": "room_01",
+            "type": "window_candidate",
+            "width": {
+              "id": "opening_candidate_10",
+              "kind": "opening_width",
+              "room_id": "room_01",
+              "value": 5.1000000000000005,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.7,
+            "review_required": true,
+            "image_bbox_px": [
+              600,
+              214,
+              1110,
+              874
+            ]
+          }
+        ]
       },
       {
         "id": "room_02",
         "name": "Room 02",
-        "polygon_xy_m": [
-          [
-            0,
-            0
-          ],
-          [
-            12.0,
-            0
-          ],
-          [
-            12.0,
-            8.0
-          ],
-          [
-            0,
-            8.0
-          ]
-        ],
+        "polygon_xy_m": [],
         "floor_area_m2": {
           "id": "floor_area",
           "kind": "floor_area",
           "room_id": "room_02",
-          "value": 96.0,
+          "value": null,
           "unit": "m2",
-          "interval": {
-            "estimate_m": 96.0,
-            "low_m": 95.92,
-            "high_m": 96.08,
-            "confidence": 0.95,
-            "method": "visual calibration interval"
-          }
+          "interval": null,
+          "status": "NOT_ESTIMATED"
         },
         "ceiling_height_m": {
           "id": "ceiling_height",
           "kind": "ceiling_height",
           "room_id": "room_02",
-          "value": 2.5,
+          "value": null,
           "unit": "m",
-          "interval": {
-            "estimate_m": 2.5,
-            "low_m": 2.25,
-            "high_m": 2.75,
-            "confidence": 0.95,
-            "method": "visual calibration interval"
-          }
+          "interval": null,
+          "status": "NOT_ESTIMATED"
         },
         "walls": [],
-        "openings": []
+        "openings": [
+          {
+            "id": "opening_candidate_1",
+            "room_id": "room_02",
+            "type": "door_candidate",
+            "width": {
+              "id": "opening_candidate_1",
+              "kind": "opening_width",
+              "room_id": "room_02",
+              "value": 0.86,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.45439999999999997,
+            "review_required": true,
+            "image_bbox_px": [
+              79,
+              148,
+              165,
+              612
+            ]
+          },
+          {
+            "id": "opening_candidate_2",
+            "room_id": "room_02",
+            "type": "window_candidate",
+            "width": {
+              "id": "opening_candidate_2",
+              "kind": "opening_width",
+              "room_id": "room_02",
+              "value": 3.2600000000000002,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.39769999999999994,
+            "review_required": true,
+            "image_bbox_px": [
+              766,
+              148,
+              1092,
+              360
+            ]
+          },
+          {
+            "id": "opening_candidate_3",
+            "room_id": "room_02",
+            "type": "window_candidate",
+            "width": {
+              "id": "opening_candidate_3",
+              "kind": "opening_width",
+              "room_id": "room_02",
+              "value": 2.8000000000000003,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.6376999999999999,
+            "review_required": true,
+            "image_bbox_px": [
+              766,
+              148,
+              1046,
+              360
+            ]
+          },
+          {
+            "id": "opening_candidate_4",
+            "room_id": "room_02",
+            "type": "window_candidate",
+            "width": {
+              "id": "opening_candidate_4",
+              "kind": "opening_width",
+              "room_id": "room_02",
+              "value": 2.92,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.6376999999999999,
+            "review_required": true,
+            "image_bbox_px": [
+              754,
+              147,
+              1046,
+              359
+            ]
+          },
+          {
+            "id": "opening_candidate_5",
+            "room_id": "room_02",
+            "type": "window_candidate",
+            "width": {
+              "id": "opening_candidate_5",
+              "kind": "opening_width",
+              "room_id": "room_02",
+              "value": 2.68,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.6376999999999999,
+            "review_required": true,
+            "image_bbox_px": [
+              766,
+              148,
+              1034,
+              360
+            ]
+          },
+          {
+            "id": "opening_candidate_6",
+            "room_id": "room_02",
+            "type": "window_candidate",
+            "width": {
+              "id": "opening_candidate_6",
+              "kind": "opening_width",
+              "room_id": "room_02",
+              "value": 2.8000000000000003,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.6376999999999999,
+            "review_required": true,
+            "image_bbox_px": [
+              754,
+              147,
+              1034,
+              359
+            ]
+          }
+        ]
       },
       {
         "id": "room_03",
         "name": "Room 03",
-        "polygon_xy_m": [
-          [
-            0,
-            0
-          ],
-          [
-            11.0,
-            0
-          ],
-          [
-            11.0,
-            7.6000000000000005
-          ],
-          [
-            0,
-            7.6000000000000005
-          ]
-        ],
+        "polygon_xy_m": [],
         "floor_area_m2": {
           "id": "floor_area",
           "kind": "floor_area",
           "room_id": "room_03",
-          "value": 83.60000000000001,
+          "value": null,
           "unit": "m2",
-          "interval": {
-            "estimate_m": 83.60000000000001,
-            "low_m": 83.52000000000001,
-            "high_m": 83.68,
-            "confidence": 0.95,
-            "method": "visual calibration interval"
-          }
+          "interval": null,
+          "status": "NOT_ESTIMATED"
         },
         "ceiling_height_m": {
           "id": "ceiling_height",
           "kind": "ceiling_height",
           "room_id": "room_03",
-          "value": 2.5,
+          "value": null,
           "unit": "m",
-          "interval": {
-            "estimate_m": 2.5,
-            "low_m": 2.25,
-            "high_m": 2.75,
-            "confidence": 0.95,
-            "method": "visual calibration interval"
-          }
+          "interval": null,
+          "status": "NOT_ESTIMATED"
         },
         "walls": [],
-        "openings": []
+        "openings": [
+          {
+            "id": "opening_candidate_1",
+            "room_id": "room_03",
+            "type": "door_candidate",
+            "width": {
+              "id": "opening_candidate_1",
+              "kind": "opening_width",
+              "room_id": "room_03",
+              "value": 0.98,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.4364473684210526,
+            "review_required": true,
+            "image_bbox_px": [
+              894,
+              187,
+              992,
+              552
+            ]
+          },
+          {
+            "id": "opening_candidate_2",
+            "room_id": "room_03",
+            "type": "door_candidate",
+            "width": {
+              "id": "opening_candidate_2",
+              "kind": "opening_width",
+              "room_id": "room_03",
+              "value": 0.86,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.43999999999999995,
+            "review_required": true,
+            "image_bbox_px": [
+              906,
+              180,
+              992,
+              560
+            ]
+          },
+          {
+            "id": "opening_candidate_3",
+            "room_id": "room_03",
+            "type": "door_candidate",
+            "width": {
+              "id": "opening_candidate_3",
+              "kind": "opening_width",
+              "room_id": "room_03",
+              "value": 0.78,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.43621052631578944,
+            "review_required": true,
+            "image_bbox_px": [
+              107,
+              188,
+              185,
+              552
+            ]
+          },
+          {
+            "id": "opening_candidate_4",
+            "room_id": "room_03",
+            "type": "door_candidate",
+            "width": {
+              "id": "opening_candidate_4",
+              "kind": "opening_width",
+              "room_id": "room_03",
+              "value": 0.74,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.43952631578947365,
+            "review_required": true,
+            "image_bbox_px": [
+              99,
+              181,
+              173,
+              559
+            ]
+          },
+          {
+            "id": "opening_candidate_5",
+            "room_id": "room_03",
+            "type": "window_candidate",
+            "width": {
+              "id": "opening_candidate_5",
+              "kind": "opening_width",
+              "room_id": "room_03",
+              "value": 3.29,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.6449473684210526,
+            "review_required": true,
+            "image_bbox_px": [
+              185,
+              188,
+              514,
+              419
+            ]
+          },
+          {
+            "id": "opening_candidate_6",
+            "room_id": "room_03",
+            "type": "window_candidate",
+            "width": {
+              "id": "opening_candidate_6",
+              "kind": "opening_width",
+              "room_id": "room_03",
+              "value": 3.41,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.6449473684210526,
+            "review_required": true,
+            "image_bbox_px": [
+              185,
+              188,
+              526,
+              420
+            ]
+          },
+          {
+            "id": "opening_candidate_7",
+            "room_id": "room_03",
+            "type": "window_candidate",
+            "width": {
+              "id": "opening_candidate_7",
+              "kind": "opening_width",
+              "room_id": "room_03",
+              "value": 3.41,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.6449473684210526,
+            "review_required": true,
+            "image_bbox_px": [
+              173,
+              187,
+              514,
+              419
+            ]
+          },
+          {
+            "id": "opening_candidate_8",
+            "room_id": "room_03",
+            "type": "window_candidate",
+            "width": {
+              "id": "opening_candidate_8",
+              "kind": "opening_width",
+              "room_id": "room_03",
+              "value": 3.5300000000000002,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.6449473684210526,
+            "review_required": true,
+            "image_bbox_px": [
+              173,
+              188,
+              526,
+              420
+            ]
+          },
+          {
+            "id": "opening_candidate_9",
+            "room_id": "room_03",
+            "type": "door_candidate",
+            "width": {
+              "id": "opening_candidate_9",
+              "kind": "opening_width",
+              "room_id": "room_03",
+              "value": 0.73,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.4364473684210526,
+            "review_required": true,
+            "image_bbox_px": [
+              919,
+              187,
+              992,
+              552
+            ]
+          },
+          {
+            "id": "opening_candidate_10",
+            "room_id": "room_03",
+            "type": "door_candidate",
+            "width": {
+              "id": "opening_candidate_10",
+              "kind": "opening_width",
+              "room_id": "room_03",
+              "value": 1.03,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.43621052631578944,
+            "review_required": true,
+            "image_bbox_px": [
+              107,
+              188,
+              210,
+              552
+            ]
+          },
+          {
+            "id": "opening_candidate_11",
+            "room_id": "room_03",
+            "type": "door_candidate",
+            "width": {
+              "id": "opening_candidate_11",
+              "kind": "opening_width",
+              "room_id": "room_03",
+              "value": 0.91,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.43952631578947365,
+            "review_required": true,
+            "image_bbox_px": [
+              107,
+              181,
+              198,
+              559
+            ]
+          },
+          {
+            "id": "opening_candidate_12",
+            "room_id": "room_03",
+            "type": "window_candidate",
+            "width": {
+              "id": "opening_candidate_12",
+              "kind": "opening_width",
+              "room_id": "room_03",
+              "value": 3.29,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.6449473684210526,
+            "review_required": true,
+            "image_bbox_px": [
+              210,
+              188,
+              539,
+              419
+            ]
+          },
+          {
+            "id": "opening_candidate_13",
+            "room_id": "room_03",
+            "type": "window_candidate",
+            "width": {
+              "id": "opening_candidate_13",
+              "kind": "opening_width",
+              "room_id": "room_03",
+              "value": 3.41,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.6449473684210526,
+            "review_required": true,
+            "image_bbox_px": [
+              210,
+              188,
+              551,
+              420
+            ]
+          },
+          {
+            "id": "opening_candidate_14",
+            "room_id": "room_03",
+            "type": "window_candidate",
+            "width": {
+              "id": "opening_candidate_14",
+              "kind": "opening_width",
+              "room_id": "room_03",
+              "value": 3.41,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.6449473684210526,
+            "review_required": true,
+            "image_bbox_px": [
+              198,
+              187,
+              539,
+              419
+            ]
+          },
+          {
+            "id": "opening_candidate_15",
+            "room_id": "room_03",
+            "type": "window_candidate",
+            "width": {
+              "id": "opening_candidate_15",
+              "kind": "opening_width",
+              "room_id": "room_03",
+              "value": 3.5300000000000002,
+              "unit": "m",
+              "interval": null,
+              "uncertainty_status": "NOT_QUANTIFIED"
+            },
+            "detected": false,
+            "candidate": true,
+            "confidence": 0.6449473684210526,
+            "review_required": true,
+            "image_bbox_px": [
+              198,
+              188,
+              551,
+              420
+            ]
+          }
+        ]
       }
     ],
     "adjacency": [],
-    "stitched_polygon_xy_m": [
-      [
-        0,
-        0
-      ],
-      [
-        9.0,
-        0
-      ],
-      [
-        9.0,
-        5.0
-      ],
-      [
-        0,
-        5.0
-      ]
-    ],
+    "stitched_polygon_xy_m": [],
     "drift": {
-      "method": "visual graph alignment",
+      "selected_mode": "on",
+      "selected_graph": {
+        "status": "NOT_RUN",
+        "reason": "no verified relative room transforms"
+      },
+      "drift_off_graph": {
+        "status": "NOT_RUN",
+        "reason": "no verified relative room transforms"
+      },
+      "drift_on_graph": {
+        "status": "NOT_RUN",
+        "reason": "no verified relative room transforms"
+      },
+      "drift_ablation": {
+        "off_footprint_xy_m": null,
+        "on_footprint_xy_m": null
+      },
       "loop_closure_applied": false
     }
   },
@@ -459,9 +2122,206 @@
   "diagnostics": {
     "line_segments": 14,
     "input_frames": 7,
-    "calibration_status": "DECLARED_SCALE_PER_PIXEL",
+    "scale": {
+      "scale_m_per_pixel": 0.01,
+      "scale_uncertainty_m_per_pixel": null,
+      "source": "explicit_cli_calibration",
+      "plane_rectified": false,
+      "status": "METRIC_SCALE_AVAILABLE_WITH_PLANE_LIMITS",
+      "candidates": [
+        {
+          "scale_m_per_pixel": 0.01,
+          "source": "explicit_cli_calibration",
+          "plane_rectified": false
+        }
+      ],
+      "conflicts": [],
+      "repeated_architectural_reference_count": 0,
+      "sensor_metadata": {},
+      "metadata_path": null,
+      "metric_scale_is_global": false,
+      "cross_room_consistency": "CHECK_ONLY; room scale is never propagated without a local reference"
+    },
+    "calibration_status": "METRIC_SCALE_AVAILABLE_WITH_PLANE_LIMITS",
     "scale_m_per_pixel": 0.01,
-    "note": "Monocular metric scale is not observable without a declared scale source.",
-    "rooms_detected": 4
+    "geometry_status": "PIXEL_OBSERVATIONS_ONLY",
+    "observed_pixel_geometry": {
+      "image_width_px": 900,
+      "image_height_px": 500,
+      "floor_boundary_annotated": false
+    },
+    "opening_candidates": [
+      {
+        "type": "door_candidate",
+        "bbox_px": [
+          79,
+          91,
+          186,
+          409
+        ],
+        "width_px": 107.0,
+        "height_px": 318.0,
+        "confidence": 0.70448,
+        "review_required": true,
+        "image": "synthetic_connector_01.png"
+      },
+      {
+        "type": "door_candidate",
+        "bbox_px": [
+          79,
+          91,
+          174,
+          409
+        ],
+        "width_px": 95.0,
+        "height_px": 318.0,
+        "confidence": 0.70448,
+        "review_required": true,
+        "image": "synthetic_connector_01.png"
+      },
+      {
+        "type": "door_candidate",
+        "bbox_px": [
+          634,
+          90,
+          820,
+          409
+        ],
+        "width_px": 186.0,
+        "height_px": 319.0,
+        "confidence": 0.7048399999999999,
+        "review_required": true,
+        "image": "synthetic_connector_01.png"
+      },
+      {
+        "type": "door_candidate",
+        "bbox_px": [
+          646,
+          90,
+          820,
+          409
+        ],
+        "width_px": 174.0,
+        "height_px": 319.0,
+        "confidence": 0.7048399999999999,
+        "review_required": true,
+        "image": "synthetic_connector_01.png"
+      },
+      {
+        "type": "door_candidate",
+        "bbox_px": [
+          671,
+          98,
+          812,
+          401
+        ],
+        "width_px": 141.0,
+        "height_px": 303.0,
+        "confidence": 0.6990799999999999,
+        "review_required": true,
+        "image": "synthetic_connector_02.png"
+      },
+      {
+        "type": "door_candidate",
+        "bbox_px": [
+          79,
+          91,
+          211,
+          409
+        ],
+        "width_px": 132.0,
+        "height_px": 318.0,
+        "confidence": 0.70448,
+        "review_required": true,
+        "image": "synthetic_connector_02.png"
+      },
+      {
+        "type": "door_candidate",
+        "bbox_px": [
+          79,
+          91,
+          199,
+          409
+        ],
+        "width_px": 120.0,
+        "height_px": 318.0,
+        "confidence": 0.70448,
+        "review_required": true,
+        "image": "synthetic_connector_02.png"
+      },
+      {
+        "type": "door_candidate",
+        "bbox_px": [
+          659,
+          98,
+          812,
+          401
+        ],
+        "width_px": 153.0,
+        "height_px": 303.0,
+        "confidence": 0.6990799999999999,
+        "review_required": true,
+        "image": "synthetic_connector_02.png"
+      }
+    ],
+    "damage_candidates": [],
+    "room_links": [],
+    "cross_room_consistency": {
+      "status": "CONSISTENT",
+      "relative_scale_spread": 0.0,
+      "room_scales_m_per_pixel": [
+        0.01,
+        0.01,
+        0.01,
+        0.01
+      ],
+      "scale_propagated": false
+    },
+    "note": "Intrinsics or a local reference alone do not make a perspective image metric. Floor area and height remain null without rectified geometry or direct measurement.",
+    "metadata_path": null,
+    "rooms_detected": 4,
+    "room_correspondence_candidates": [
+      {
+        "room_a": "connector",
+        "room_b": "room_02",
+        "matches": 57,
+        "inliers": 12,
+        "inlier_fraction": 0.21052631578947367,
+        "status": "CANDIDATE_REVIEW_ONLY",
+        "used_for_registration": false,
+        "reason": "Image overlap is not proof of physical adjacency or metric alignment"
+      },
+      {
+        "room_a": "connector",
+        "room_b": "room_03",
+        "matches": 87,
+        "inliers": 18,
+        "inlier_fraction": 0.20689655172413793,
+        "status": "CANDIDATE_REVIEW_ONLY",
+        "used_for_registration": false,
+        "reason": "Image overlap is not proof of physical adjacency or metric alignment"
+      },
+      {
+        "room_a": "room_01",
+        "room_b": "room_03",
+        "matches": 56,
+        "inliers": 11,
+        "inlier_fraction": 0.19642857142857142,
+        "status": "CANDIDATE_REVIEW_ONLY",
+        "used_for_registration": false,
+        "reason": "Image overlap is not proof of physical adjacency or metric alignment"
+      },
+      {
+        "room_a": "room_02",
+        "room_b": "room_03",
+        "matches": 64,
+        "inliers": 17,
+        "inlier_fraction": 0.265625,
+        "status": "CANDIDATE_REVIEW_ONLY",
+        "used_for_registration": false,
+        "reason": "Image overlap is not proof of physical adjacency or metric alignment"
+      }
+    ],
+    "verified_room_constraints": 0
   }
 }

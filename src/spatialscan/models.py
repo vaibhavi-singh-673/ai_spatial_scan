@@ -13,9 +13,11 @@ class Measurement(BaseModel):
     id: str
     kind: Literal["wall_length","opening_width","ceiling_height","floor_area","damage_extent"]
     room_id: str
-    value: float
+    value: Optional[float]
     unit: str
-    interval: CI
+    interval: Optional[CI] = None
+    status: Optional[str] = None
+    uncertainty_status: Optional[str] = None
 
 class Opening(BaseModel):
     id: str
@@ -23,6 +25,9 @@ class Opening(BaseModel):
     type: str
     width: Measurement
     detected: bool = True
+    candidate: bool = False
+    confidence: Optional[float] = None
+    review_required: bool = False
 
 class DamageRegion(BaseModel):
     id: str
@@ -32,6 +37,8 @@ class DamageRegion(BaseModel):
     extent_m2: Optional[Measurement] = None
     polygon_xy_m: list[list[float]] = Field(default_factory=list)
     confidence: float = 0.0
+    status: Optional[str] = None
+    polygon_px: list[list[float]] = Field(default_factory=list)
 
 class ScopeItem(BaseModel):
     id: str

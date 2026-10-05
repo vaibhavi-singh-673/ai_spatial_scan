@@ -25,9 +25,13 @@ def _run_capture(row):
     if tier == "lidar":
         prediction=lidar_run(input_path, row["capture_id"])
     elif tier == "video":
-        prediction=estimate_visual_capture(collect_video_frames(input_path), tier, row.get("scale_m_per_pixel"))
+        prediction=estimate_visual_capture(collect_video_frames(input_path), tier,
+                                           row.get("scale_m_per_pixel"), row.get("metadata_path"),
+                                           row.get("drift_mode","on"))
     elif tier == "photos":
-        prediction=estimate_visual_capture(collect_images(input_path), tier, row.get("scale_m_per_pixel"))
+        prediction=estimate_visual_capture(collect_images(input_path), tier,
+                                           row.get("scale_m_per_pixel"), row.get("metadata_path"),
+                                           row.get("drift_mode","on"))
     else:
         raise ValueError(f"Unsupported tier: {tier}")
     return prediction
@@ -186,10 +190,14 @@ def run_benchmark(manifest_path, output_path=None):
             continue
         try:
             started = perf_counter()
+            metadata_path = (_resolve_manifest_path(row["metadata_path"], manifest_file)
+                             if row.get("metadata_path") else None)
             with _capture_directory(raw_path) as capture_dir:
-                quality=assess_capture(capture_dir, row["tier"], row.get("scale_m_per_pixel"))
+                quality=assess_capture(capture_dir, row["tier"], row.get("scale_m_per_pixel"),
+                                       metadata_path)
                 quality["input"] = str(raw_path)
-                prediction=_run_capture({**row, "raw_path": capture_dir})
+                prediction=_run_capture({**row, "raw_path": capture_dir,
+                                         "metadata_path": metadata_path})
             processing_seconds = perf_counter() - started
             repeat_captures.append({**row, "prediction": prediction})
             ground_truth=(_resolve_manifest_path(row["ground_truth_path"], manifest_file)

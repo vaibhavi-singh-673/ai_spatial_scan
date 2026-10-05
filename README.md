@@ -57,6 +57,12 @@ pip install -e .
 python -m spatialscan --help
 ```
 
+Check the environment before a cold capture:
+
+```bash
+python -m spatialscan doctor --json-output runs/doctor/doctor.json
+```
+
 Run the included LiDAR fixture:
 
 ```bash
@@ -100,8 +106,9 @@ python -m spatialscan quality --tier video --input fixtures/video --output runs/
 
 The quality report checks file discovery, decoding, frame/image coverage,
 resolution, LiDAR metadata, confidence and pose coverage, then returns a score,
-readiness status, and concrete recommendations. `REVIEW` is intentional when
-visual metric calibration has not been declared.
+readiness status, and concrete recommendations. Visual captures remain
+`REVIEW` until metric room geometry has a rectified floor boundary and a direct
+height reference; a pixel scale alone is insufficient.
 
 Pass the same measured calibration to the quality check when it is available:
 
@@ -193,7 +200,11 @@ capture
 
 ## Important limitations
 
-Metric reconstruction from arbitrary monocular photos/video is scale-ambiguous. The visual tiers therefore require a declared calibration source and widen intervals when calibration evidence is weak. They do **not** fabricate centimetre-level accuracy.
+Metric reconstruction from arbitrary monocular photos/video is scale-ambiguous.
+Scale references and sensor intrinsics do not silently create a room footprint:
+floor area remains unknown without a rectified floor boundary, and ceiling
+height remains unknown without a direct measurement. ORB matches stay candidate
+room links until verified relative transforms are supplied.
 
 The supplied LiDAR fixture contains depth, confidence, camera intrinsics and odometry. It is included for pipeline validation only.
 
