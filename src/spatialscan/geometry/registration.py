@@ -41,21 +41,23 @@ def optimize_room_graph(room_ids, constraints, use_all_edges=True):
                       "rotation_rad":values[2], "weight":weight})
     if not edges:
         return {"status": "NOT_RUN", "reason": "no verified relative room transforms"}
+    # Use the same deterministic spanning tree as the uncorrected baseline;
+    # non-tree constraints become held-out loop-closure measurements.
+    tree, seen = [], {room_ids[0]}
+    pending = list(edges)
+    changed = True
+    while changed:
+        changed = False
+        for edge in pending[:]:
+            a, b = edge["room_a"], edge["room_b"]
+            if (a in seen) != (b in seen):
+                tree.append(edge)
+                seen.update((a,b))
+                pending.remove(edge)
+                changed = True
+    closure_edges = [edge for edge in edges if edge not in tree]
     if not use_all_edges:
-        # Keep a deterministic spanning forest for the drift-off baseline.
-        selected, seen = [], {room_ids[0]}
-        pending = list(edges)
-        changed = True
-        while changed:
-            changed = False
-            for edge in pending[:]:
-                a, b = edge["room_a"], edge["room_b"]
-                if (a in seen) != (b in seen):
-                    selected.append(edge)
-                    seen.update((a,b))
-                    pending.remove(edge)
-                    changed = True
-        edges = selected
+        edges = tree
     if not edges:
         return {"status": "NOT_RUN", "reason": "verified links do not connect an anchored room"}
     connected = {room_ids[0]}
@@ -89,6 +91,13 @@ def optimize_room_graph(room_ids, constraints, use_all_edges=True):
         poses[1:] = solution.x.reshape(-1, 3)
     poses[:,2] = np.vectorize(_wrap)(poses[:,2])
     residuals = residual(solution.x).reshape(-1,3)
+    closure_residuals = []
+    for edge in closure_edges:
+        observed = np.array([edge["dx_m"], edge["dy_m"], edge["rotation_rad"]])
+        error = _relative(poses[index[edge["room_a"]]], poses[index[edge["room_b"]]]) - observed
+        error[2] = _wrap(error[2])
+        closure_residuals.append(float(np.linalg.norm(error[:2])))
+    closure_error = float(np.mean(closure_residuals)) if closure_residuals else None
     return {"status":"PASS" if solution.success else "REVIEW",
             "poses":{room_id:{"x_m":float(poses[i,0]),"y_m":float(poses[i,1]),
                               "rotation_rad":float(poses[i,2])}
@@ -98,7 +107,9 @@ def optimize_room_graph(room_ids, constraints, use_all_edges=True):
                     "translation_m":float(np.linalg.norm(residuals[i,:2])),
                     "rotation_rad":float(abs(residuals[i,2]))}
                 for i,edge in enumerate(edges)},
-            "loop_closure_applied":any(edge.get("loop_closure") for edge in edges),
+            "closure_edge_count":len(closure_edges),"closure_error_m":closure_error,
+            "closure_error_status":"MEASURED_HELD_OUT_CONSTRAINTS" if closure_edges else "NOT_RUN_NO_CLOSURE_EDGES",
+            "loop_closure_applied":bool(use_all_edges and closure_edges),
             "optimizer":"scipy.least_squares_huber","success":bool(solution.success)}
 
 

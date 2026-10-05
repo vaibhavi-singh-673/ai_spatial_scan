@@ -26,6 +26,10 @@
     "adjacency": {
       "status": "NOT_RUN",
       "reason": "ground-truth adjacency edges missing"
+    },
+    "drift_ablation": {
+      "status": "NOT_RUN",
+      "reason": "ground-truth stitched_polygon_xy_m is missing"
     }
   }
 }

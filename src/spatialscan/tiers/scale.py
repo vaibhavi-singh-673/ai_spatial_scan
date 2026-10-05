@@ -142,22 +142,41 @@ def estimate_scale(images, declared_scale_m_per_pixel=None, metadata_path=None):
     selected = None
     status = "SCALE_UNRESOLVED"
     conflicts = []
+    # Rank by evidence, never by numeric agreement across unlike evidence types.
+    # Several independent measured architectural references outrank one local QR.
+    priority = {"explicit_cli_calibration": 0, "sensor_calibration_metadata": 1,
+                "capture_metadata_calibration": 1, "measured_geometric_reference": 2,
+                "recognized_qr_known_size": 3}
+    for item in candidates:
+        item["evidence_rank"] = priority.get(item["source"], 2)
     if candidates:
-        values = np.asarray([item["scale_m_per_pixel"] for item in candidates], dtype=float)
+        best_rank = min(item["evidence_rank"] for item in candidates)
+        strongest = [item for item in candidates if item["evidence_rank"] == best_rank]
+        # At the measured-reference rank, repeated architectural dimensions are
+        # the preferred estimator; this is still local scale unless rectified.
+        if best_rank == 2:
+            architectural = [item for item in strongest if item.get("reference_kind") in
+                             {"door", "window", "wall", "repeated_architectural_dimension"}]
+            if len(architectural) >= 2:
+                strongest = architectural
+        values = np.asarray([item["scale_m_per_pixel"] for item in strongest], dtype=float)
         median = float(np.median(values))
         relative_deviation = np.abs(values - median) / max(median, 1e-12)
-        if len(values) > 1 and float(np.max(relative_deviation)) > 0.15 and declared_scale_m_per_pixel is None:
-            conflicts = [float(value) for value in values]
+        if len(values) > 1 and float(np.max(relative_deviation)) > 0.15:
+            conflicts = [{"source": item["source"], "scale_m_per_pixel": item["scale_m_per_pixel"]}
+                         for item in strongest]
             status = "SCALE_REFERENCE_CONFLICT"
         else:
-            selected = candidates[0] if declared_scale_m_per_pixel is not None else {
-                "scale_m_per_pixel": median,
-                "source": "+".join(sorted({item["source"] for item in candidates})),
-                "plane_rectified": all(item["plane_rectified"] for item in candidates),
-                "scale_uncertainty_m_per_pixel": (
-                    max(item["scale_uncertainty_m_per_pixel"] for item in candidates)
-                    if all(item.get("scale_uncertainty_m_per_pixel") is not None for item in candidates) else None),
-            }
+            representative = min(strongest, key=lambda item: (
+                float(item["scale_uncertainty_m_per_pixel"])
+                if item.get("scale_uncertainty_m_per_pixel") is not None else float("inf")))
+            selected = {**representative, "scale_m_per_pixel": median,
+                        "source": representative["source"] if len(strongest) == 1 else
+                                 f"robust_median_of_{len(strongest)}_{representative['source']}",
+                        "plane_rectified": all(item.get("plane_rectified", False) for item in strongest),
+                        "scale_uncertainty_m_per_pixel": max(
+                            (float(item["scale_uncertainty_m_per_pixel"]) for item in strongest
+                             if item.get("scale_uncertainty_m_per_pixel") is not None), default=None)}
             status = "METRIC_SCALE_AVAILABLE_WITH_PLANE_LIMITS"
     elif sensor_description:
         status = "SENSOR_METADATA_ONLY_NO_ABSOLUTE_SCALE"
@@ -170,6 +189,10 @@ def estimate_scale(images, declared_scale_m_per_pixel=None, metadata_path=None):
         "status": status,
         "candidates": candidates,
         "conflicts": conflicts,
+        "selection": {"strategy": "strongest_evidence_then_uncertainty_then_robust_median",
+                      "selected_rank": selected.get("evidence_rank") if selected else None,
+                      "ignored_weaker_candidate_count": sum(1 for item in candidates
+                          if selected and item.get("evidence_rank", 99) > selected.get("evidence_rank", 99))},
         "repeated_architectural_reference_count": len(repeated),
         "sensor_metadata": sensor_description,
         "metadata_path": str(metadata_path) if metadata_path else None,

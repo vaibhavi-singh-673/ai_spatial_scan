@@ -2132,10 +2132,16 @@
         {
           "scale_m_per_pixel": 0.01,
           "source": "explicit_cli_calibration",
-          "plane_rectified": false
+          "plane_rectified": false,
+          "evidence_rank": 0
         }
       ],
       "conflicts": [],
+      "selection": {
+        "strategy": "strongest_evidence_then_uncertainty_then_robust_median",
+        "selected_rank": 0,
+        "ignored_weaker_candidate_count": 0
+      },
       "repeated_architectural_reference_count": 0,
       "sensor_metadata": {},
       "metadata_path": null,
@@ -2163,6 +2169,12 @@
         "height_px": 318.0,
         "confidence": 0.70448,
         "review_required": true,
+        "geometry_checks": {
+          "paired_jambs": true,
+          "header_line": true,
+          "wall_consistency": "UNVERIFIED"
+        },
+        "status": "CANDIDATE_REVIEW_ONLY",
         "image": "synthetic_connector_01.png"
       },
       {
@@ -2177,6 +2189,12 @@
         "height_px": 318.0,
         "confidence": 0.70448,
         "review_required": true,
+        "geometry_checks": {
+          "paired_jambs": true,
+          "header_line": true,
+          "wall_consistency": "UNVERIFIED"
+        },
+        "status": "CANDIDATE_REVIEW_ONLY",
         "image": "synthetic_connector_01.png"
       },
       {
@@ -2191,6 +2209,12 @@
         "height_px": 319.0,
         "confidence": 0.7048399999999999,
         "review_required": true,
+        "geometry_checks": {
+          "paired_jambs": true,
+          "header_line": true,
+          "wall_consistency": "UNVERIFIED"
+        },
+        "status": "CANDIDATE_REVIEW_ONLY",
         "image": "synthetic_connector_01.png"
       },
       {
@@ -2205,6 +2229,12 @@
         "height_px": 319.0,
         "confidence": 0.7048399999999999,
         "review_required": true,
+        "geometry_checks": {
+          "paired_jambs": true,
+          "header_line": true,
+          "wall_consistency": "UNVERIFIED"
+        },
+        "status": "CANDIDATE_REVIEW_ONLY",
         "image": "synthetic_connector_01.png"
       },
       {
@@ -2219,6 +2249,12 @@
         "height_px": 303.0,
         "confidence": 0.6990799999999999,
         "review_required": true,
+        "geometry_checks": {
+          "paired_jambs": true,
+          "header_line": true,
+          "wall_consistency": "UNVERIFIED"
+        },
+        "status": "CANDIDATE_REVIEW_ONLY",
         "image": "synthetic_connector_02.png"
       },
       {
@@ -2233,6 +2269,12 @@
         "height_px": 318.0,
         "confidence": 0.70448,
         "review_required": true,
+        "geometry_checks": {
+          "paired_jambs": true,
+          "header_line": true,
+          "wall_consistency": "UNVERIFIED"
+        },
+        "status": "CANDIDATE_REVIEW_ONLY",
         "image": "synthetic_connector_02.png"
       },
       {
@@ -2247,6 +2289,12 @@
         "height_px": 318.0,
         "confidence": 0.70448,
         "review_required": true,
+        "geometry_checks": {
+          "paired_jambs": true,
+          "header_line": true,
+          "wall_consistency": "UNVERIFIED"
+        },
+        "status": "CANDIDATE_REVIEW_ONLY",
         "image": "synthetic_connector_02.png"
       },
       {
@@ -2261,6 +2309,12 @@
         "height_px": 303.0,
         "confidence": 0.6990799999999999,
         "review_required": true,
+        "geometry_checks": {
+          "paired_jambs": true,
+          "header_line": true,
+          "wall_consistency": "UNVERIFIED"
+        },
+        "status": "CANDIDATE_REVIEW_ONLY",
         "image": "synthetic_connector_02.png"
       }
     ],

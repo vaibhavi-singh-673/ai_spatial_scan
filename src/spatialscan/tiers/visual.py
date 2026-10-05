@@ -7,6 +7,8 @@ import numpy as np
 from ..geometry.utils import ci, polygon_area
 from ..geometry.registration import candidate_feature_links, optimize_room_graph
 from .scale import estimate_scale
+from .openings import detect_opening_candidates
+from .damage import detect_damage_candidates
 
 
 def collect_images(path):
@@ -97,65 +99,6 @@ def _lines(image):
     return gray, edges, raw.reshape(-1, 4) if raw is not None else np.empty((0, 4), dtype=int)
 
 
-def _opening_candidates(lines, width, height):
-    vertical, horizontal = [], []
-    for x1, y1, x2, y2 in lines:
-        dx, dy = abs(int(x2)-int(x1)), abs(int(y2)-int(y1))
-        if dy >= max(45, height*.10) and dx <= max(8, dy*.08):
-            vertical.append((int((x1+x2)/2), min(y1,y2), max(y1,y2), dy))
-        elif dx >= max(35, width*.06) and dy <= max(8, dx*.08):
-            horizontal.append((min(x1,x2), max(x1,x2), int((y1+y2)/2)))
-    candidates = []
-    for i, left in enumerate(vertical):
-        for right in vertical[i+1:]:
-            gap = abs(right[0]-left[0])
-            top, bottom = max(left[1],right[1]), min(left[2],right[2])
-            common_height = bottom-top
-            if not width*.025 <= gap <= width*.38 or common_height < height*.12:
-                continue
-            aspect = common_height/max(gap,1)
-            if not .65 <= aspect <= 5.5:
-                continue
-            bar = any(x0 <= min(left[0],right[0]) and x1 >= max(left[0],right[0])
-                      and abs(y-top) < height*.04 for x0,x1,y in horizontal)
-            confidence = min(.82, .35 + .24*bar + .18*min(left[3],right[3])/height)
-            box = [min(left[0],right[0]), int(top), max(left[0],right[0]), int(bottom)]
-            if any(abs(box[0]-item["bbox_px"][0]) < 12 and abs(box[2]-item["bbox_px"][2]) < 12
-                   for item in candidates):
-                continue
-            candidates.append({"type": "door_candidate" if aspect >= 1.7 else "window_candidate",
-                               "bbox_px": box, "width_px": float(gap),
-                               "height_px": float(common_height), "confidence": float(confidence),
-                               "review_required": True})
-    return candidates
-
-
-def _appearance_anomalies(image):
-    lab = cv2.cvtColor(image, cv2.COLOR_BGR2LAB)
-    local = cv2.GaussianBlur(lab, (0,0), 13)
-    delta = cv2.absdiff(lab, local)[:,:,0]
-    threshold = max(18, int(np.percentile(delta, 98)))
-    mask = cv2.threshold(delta, threshold, 255, cv2.THRESH_BINARY)[1]
-    kernel = np.ones((5,5), np.uint8)
-    mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
-    mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
-    contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    image_area = image.shape[0]*image.shape[1]
-    found = []
-    for contour in contours:
-        area = cv2.contourArea(contour)
-        if area < max(100, image_area*.0004) or area > image_area*.08:
-            continue
-        x,y,w,h = cv2.boundingRect(contour)
-        mean_l = cv2.cvtColor(image[y:y+h,x:x+w],cv2.COLOR_BGR2LAB)[:,:,0].mean()
-        polygon = cv2.approxPolyDP(contour,max(2,.015*cv2.arcLength(contour,True)),True)
-        found.append({"bbox_px":[x,y,x+w,y+h],"polygon_px":polygon.reshape(-1,2).tolist(),
-                      "damage_class":"staining_candidate" if mean_l < 105 else "impact_delamination_candidate",
-                      "confidence":float(min(.69,.35+.25*min(1,area/(image_area*.02)))),
-                      "status":"appearance_anomaly_requires_human_review"})
-    return sorted(found,key=lambda item:item["confidence"],reverse=True)[:20]
-
-
 def _measurement(value, unit, kind, room_id, identifier, method, half_width=None):
     if value is None:
         return {"id":identifier,"kind":kind,"room_id":room_id,"value":None,"unit":unit,
@@ -185,10 +128,10 @@ def estimate_visual_plan(images, tier, scale_m_per_pixel=None, room_id="room_01"
     for frame,source in pairs:
         frame_gray,_,frame_lines=_lines(frame)
         source_name=Path(source).name if isinstance(source,Path) else "video_frame"
-        for candidate in _opening_candidates(frame_lines,frame_gray.shape[1],frame_gray.shape[0]):
+        for candidate in detect_opening_candidates(frame_lines,frame_gray.shape[1],frame_gray.shape[0]):
             candidate["image"] = source_name
             opening_candidates.append(candidate)
-        for anomaly in _appearance_anomalies(frame):
+        for anomaly in detect_damage_candidates(frame):
             anomaly["image"] = source_name
             anomalies.append(anomaly)
     opening_candidates = opening_candidates[:100]

@@ -24,6 +24,56 @@ def _adjacency(document):
             if edge.get("room_a") and edge.get("room_b")}
 
 
+def _drift_ablation(predicted, truth):
+    """Compare both registration modes against an explicitly measured footprint."""
+    drift = predicted.get("plan", {}).get("drift", {})
+    ablation = drift.get("drift_ablation", {})
+    gt_polygon = truth.get("plan", {}).get("stitched_polygon_xy_m")
+    if not gt_polygon:
+        return {"status":"NOT_RUN", "reason":"ground-truth stitched_polygon_xy_m is missing"}
+    try:
+        from shapely.geometry import Polygon
+        target = Polygon(gt_polygon)
+        if target.is_empty or not target.is_valid or target.area <= 0:
+            return {"status":"NOT_RUN", "reason":"ground-truth footprint is invalid or has zero area"}
+        target = target.buffer(0)
+    except (ImportError, TypeError, ValueError):
+        return {"status":"NOT_RUN", "reason":"valid polygon comparison requires Shapely and metric coordinates"}
+
+    def mode(label, key, graph_key):
+        polygon = ablation.get(key)
+        graph = drift.get(graph_key, {})
+        if not polygon or graph.get("status") != "PASS":
+            return {"status":"NOT_RUN", "reason":"metric footprint or connected verified registration is unavailable",
+                    "footprint_error_fraction":None, "closure_error_m":None}
+        try:
+            measured = Polygon(polygon)
+            if not measured.is_valid:
+                measured = measured.buffer(0)
+            error = float(measured.symmetric_difference(target).area / target.area)
+        except (TypeError, ValueError):
+            return {"status":"NOT_RUN", "reason":"predicted footprint is invalid",
+                    "footprint_error_fraction":None, "closure_error_m":None}
+        return {"label":label, "status":"MEASURED", "footprint_error_fraction":error,
+                "footprint_error_definition":"symmetric_difference_area / ground_truth_area",
+                "closure_error_m":graph.get("closure_error_m"),
+                "closure_status":graph.get("closure_error_status", "NOT_RUN")}
+
+    without = mode("WITHOUT CORRECTION", "off_footprint_xy_m", "drift_off_graph")
+    with_correction = mode("WITH CORRECTION", "on_footprint_xy_m", "drift_on_graph")
+    def improvement(before, after, field):
+        a, b = before.get(field), after.get(field)
+        return (100.0 * (a-b)/a) if isinstance(a,(int,float)) and isinstance(b,(int,float)) and a > 0 else None
+    footprint_improvement = improvement(without, with_correction, "footprint_error_fraction")
+    closure_improvement = improvement(without, with_correction, "closure_error_m")
+    any_measured = without["status"] == "MEASURED" or with_correction["status"] == "MEASURED"
+    return {"status":"MEASURED" if any_measured else "NOT_RUN",
+            "WITHOUT CORRECTION":without, "WITH CORRECTION":with_correction,
+            "IMPROVEMENT": {"footprint_error_percent":footprint_improvement,
+                            "closure_error_percent":closure_improvement,
+                            "definition":"100 * (without - with) / without; positive means improvement"}}
+
+
 def evaluate(prediction, gt):
     with open(prediction, encoding="utf-8") as source:
         predicted = json.load(source)
@@ -138,5 +188,9 @@ def evaluate(prediction, gt):
         gates["adjacency"] = _not_run("ground-truth adjacency edges missing")
 
     states = [gate["status"] for gate in gates.values()]
+    overall = "FAIL" if "FAIL" in states else "PASS" if states and all(s == "PASS" for s in states) else "NOT_RUN"
+    drift_ablation = _drift_ablation(predicted, truth)
+    gates["drift_ablation"] = drift_ablation
+    states = [gate.get("status", "NOT_RUN") for gate in gates.values()]
     overall = "FAIL" if "FAIL" in states else "PASS" if states and all(s == "PASS" for s in states) else "NOT_RUN"
     return {"status": overall, "matched_rooms": common, "gates": gates}
