@@ -1,10 +1,14 @@
 {
   "status": "FAIL",
+  "matched_rooms": [
+    "room_01"
+  ],
   "gates": {
     "ceiling_height": {
       "max_error_m": 4.707913507342141,
       "status": "FAIL",
-      "tolerance_m": 0.015
+      "tolerance_m": 0.015,
+      "measured_rooms": 1
     },
     "whole_property_footprint": {
       "error_fraction": 0.04856656462708372,
@@ -13,7 +17,15 @@
     },
     "wall_length": {
       "status": "NOT_RUN",
-      "reason": "ordered wall ground truth not supplied"
+      "reason": "ordered wall measurements missing or incomplete"
+    },
+    "opening_width": {
+      "status": "NOT_RUN",
+      "reason": "matched opening width measurements missing"
+    },
+    "adjacency": {
+      "status": "NOT_RUN",
+      "reason": "ground-truth adjacency edges missing"
     }
   }
 }

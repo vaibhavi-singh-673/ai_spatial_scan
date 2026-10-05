@@ -1,0 +1,15 @@
+﻿{
+    "schema_version":  "1.0",
+    "evidence_class":  "COLD_REPRODUCTION_ONLY",
+    "tier":  "lidar",
+    "input_path":  "C:\\Users\\vaibhavi\\Desktop\\YC\\ai_spatial_solution\\fixtures\\lidar_sample",
+    "input_file_count":  17,
+    "input_bytes":  4670027,
+    "python_version":  "Python 3.12.3",
+    "readiness_seconds":  3.1148222,
+    "processing_seconds":  2.2731494,
+    "total_seconds":  5.3879716,
+    "prediction_path":  "runs\\cold_lidar\\prediction.json",
+    "ground_truth_path":  "",
+    "recorded_at_utc":  "2026-10-05T08:08:13.4432408Z"
+}

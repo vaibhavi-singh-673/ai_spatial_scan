@@ -31,8 +31,10 @@
       "status": "PASS",
       "weight": 25,
       "details": {
-        "decoded": 7,
-        "total": 7
+        "decoded_sample": 7,
+        "sampled_total": 7,
+        "available_total": 7,
+        "sampling_limit": 120
       },
       "blocking": true
     },
@@ -42,7 +44,7 @@
       "weight": 10,
       "details": {
         "with_confidence": 7,
-        "depth_frames": 7
+        "sampled_depth_frames": 7
       },
       "blocking": false
     },
@@ -52,7 +54,7 @@
       "weight": 10,
       "details": {
         "with_pose": 7,
-        "depth_frames": 7
+        "sampled_depth_frames": 7
       },
       "blocking": false
     },

@@ -1337,6 +1337,7 @@
   "scope": [],
   "diagnostics": {
     "frames_available": 7,
+    "frames_sampled": 7,
     "frames_used": 7,
     "point_count": 17944,
     "imu_rows": 21339
