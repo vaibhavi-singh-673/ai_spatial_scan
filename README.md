@@ -2,7 +2,8 @@
 
 A local, reproducible three-tier indoor reconstruction pipeline for the August 2026 Applied AI Engineer case study.
 
-**Tiers**
+## Tiers
+
 1. Photos: 2–8 stills per room, no depth/poses.
 2. Video: handheld walkthrough.
 3. LiDAR: depth + poses + intrinsics.
@@ -11,17 +12,15 @@ The implementation deliberately separates **measurement**, **calibration**, and 
 
 ## At a glance
 
-| Need | Use | Result |
-|---|---|---|
-| Process a capture | `python -m spatialscan run ...` | Reconstruction JSON |
-| Check readiness | `python -m spatialscan quality ...` | Score, checks, recommendations |
-| View results | `python -m spatialscan report ...` | Portable HTML report |
-| Use the dashboard | `scripts/open_dashboard.ps1` | Local visual review UI |
-| Watch the sample video | `scripts/open_video_preview.ps1` | Browser video player |
+| Need                   | Use                                 | Result                         |
+| ---------------------- | ----------------------------------- | ------------------------------ |
+| Process a capture      | `python -m spatialscan run ...`     | Reconstruction JSON            |
+| Check readiness        | `python -m spatialscan quality ...` | Score, checks, recommendations |
+| View results           | `python -m spatialscan report ...`  | Portable HTML report           |
+| Use the dashboard      | `scripts/open_dashboard.ps1`        | Local visual review UI         |
+| Watch the sample video | `scripts/open_video_preview.ps1`    | Browser video player           |
 
-The project is local-only. It does not call a hosted backend, upload captures,
-or require model weights. The dashboard launcher starts a local-only Python
-HTTP server because browsers restrict video playback from `file://` pages.
+The project is local-only. It does not call a hosted backend, upload captures, or require model weights. The dashboard launcher starts a local-only Python HTTP server because browsers restrict video playback from `file://` pages.
 
 ## What is implemented
 
@@ -44,24 +43,24 @@ Python 3.11+ is recommended.
 
 ```bash
 python -m venv .venv
+
 # Windows PowerShell
 .venv\Scripts\Activate.ps1
+
 # macOS/Linux
 # source .venv/bin/activate
 
 pip install -r requirements.txt
+
 pip install -e .
+
 python -m spatialscan --help
 ```
 
 Run the included LiDAR fixture:
 
 ```bash
-python -m spatialscan run \
-  --tier lidar \
-  --input fixtures/lidar_sample \
-  --output runs/lidar_fixture.json \
-  --render runs/lidar_fixture.png
+python -m spatialscan run --tier lidar --input fixtures/lidar_sample --output runs/lidar_fixture.json --render runs/lidar_fixture.png
 ```
 
 Run the included video fixture from the VS Code PowerShell terminal:
@@ -96,10 +95,7 @@ Choose a report from the sample picker, then select **Load sample**. Choose
 Check capture readiness before reconstruction:
 
 ```bash
-python -m spatialscan quality \
-  --tier video \
-  --input fixtures/video \
-  --output runs/quality_video.json
+python -m spatialscan quality --tier video --input fixtures/video --output runs/quality_video.json
 ```
 
 The quality report checks file discovery, decoding, frame/image coverage,
@@ -110,39 +106,26 @@ visual metric calibration has not been declared.
 Pass the same measured calibration to the quality check when it is available:
 
 ```bash
-python -m spatialscan quality \
-  --tier video \
-  --input fixtures/video \
-  --output runs/quality_video_calibrated.json \
-  --scale-m-per-pixel 0.01
+python -m spatialscan quality --tier video --input fixtures/video --output runs/quality_video_calibrated.json --scale-m-per-pixel 0.01
 ```
 
 Run a visual tier with an explicit scale calibration when a measured reference
 has been collected:
 
 ```bash
-python -m spatialscan run \
-  --tier photos \
-  --input fixtures/photo \
-  --output runs/photos_calibrated.json \
-  --scale-m-per-pixel 0.01
+python -m spatialscan run --tier photos --input fixtures/photo --output runs/photos_calibrated.json --scale-m-per-pixel 0.01
 ```
 
 Render any JSON quality or reconstruction result as a portable HTML report:
 
 ```bash
-python -m spatialscan report \
-  --input runs/quality_video.json \
-  --output runs/quality_video.html
+python -m spatialscan report --input runs/quality_video.json --output runs/quality_video.html
 ```
 
 Evaluate against supplied ground truth:
 
 ```bash
-python -m spatialscan evaluate \
-  --prediction runs/lidar_fixture.json \
-  --ground-truth benchmarks/ground_truth/example.json \
-  --output benchmarks/results/lidar_fixture.json
+python -m spatialscan evaluate --prediction runs/lidar_fixture.json --ground-truth benchmarks/ground_truth/example.json --output benchmarks/results/lidar_fixture.json
 ```
 
 > The included fixture is a sensor-format smoke test, not claimed benchmark ground truth. Replace/add your measured benchmark set before submitting accuracy numbers.
@@ -239,9 +222,7 @@ and gives the next collection step for every blocked rubric component.
 Record the shipped fix-loop delta on the unchanged LiDAR fixture:
 
 ```bash
-python -m spatialscan fixloop \
-  --input fixtures/lidar_sample \
-  --output runs/fixloop_lidar.json
+python -m spatialscan fixloop --input fixtures/lidar_sample --output runs/fixloop_lidar.json
 ```
 
 This produces a measured before/after ablation for the pose/IMU repair, but it
@@ -252,10 +233,7 @@ The manifest records every capture, device, tier, repeated-room pair, raw-data h
 Run the cold-capture workflow with:
 
 ```powershell
-.\scripts\run_cold_capture.ps1 `
-  -Tier lidar `
-  -InputPath fixtures\lidar_sample `
-  -OutputDirectory runs\cold_lidar
+.\scripts\run_cold_capture.ps1 -Tier lidar -InputPath fixtures\lidar_sample -OutputDirectory runs\cold_lidar
 ```
 
 Add `-GroundTruthPath <path>` to produce an evaluation artifact when measured
