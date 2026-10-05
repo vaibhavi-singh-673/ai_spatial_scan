@@ -32,7 +32,7 @@ The project is local-only. It does not call a hosted backend, upload captures, o
 - Multi-room graph representation and drift-correction hooks.
 - Opening/damage/scope schemas.
 - Ground-truth comparison and gate evaluation.
-- Repeatability and ablation report generation.
+- Fixture ablation report generation; repeatability remains pending paired captures.
 - Before/after fix-loop structure.
 - Deterministic fixture replay.
 - Windows/macOS/Linux setup.
@@ -205,10 +205,19 @@ Raw benchmark captures and laser/tape measurements belong under `benchmarks/raw/
 python -m spatialscan benchmark --manifest benchmarks/manifest.json
 ```
 
-The benchmark runner now validates each manifest row, runs available local
-captures, evaluates only when the declared ground truth exists, and records
-`NOT_RUN` for missing external evidence. It never turns a fixture replay into
-an accuracy claim.
+The benchmark runner validates each manifest row, resolves capture paths from
+the project root, runs available local captures, evaluates only when declared
+ground truth exists, and records `NOT_RUN` for missing physical evidence. Its
+measurement evaluator reports wall length, opening width, ceiling height,
+whole-property floor area, and adjacency when the matching ground-truth values
+are present. A partial measurement set cannot produce an overall PASS. It never
+turns a fixture replay into an accuracy claim.
+
+See [`benchmarks/README.md`](benchmarks/README.md) for the smoke/benchmark data
+boundary, capture storage policy, and cold reproduction commands. The current
+manifest is intentionally empty; it is not evidence that a physical benchmark
+has been run. Repeatability and incumbent comparisons remain `NOT_RUN` until
+paired repeated captures and original app exports are collected and reviewed.
 
 Audit the submission against the scoring rubric:
 

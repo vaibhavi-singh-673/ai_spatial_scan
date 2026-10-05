@@ -2,13 +2,18 @@
 
 ## Status
 
-**Submission package status: engineering baseline / benchmark data collection incomplete.**
+**Engineering baseline; physical benchmark collection is incomplete.** The
+repository contains synthetic photo/video fixtures and a deterministic LiDAR
+sensor-format fixture for smoke testing. No physical multi-tier property
+capture, laser/tape ground truth, measured damage annotations, repeat-capture
+pair, or incumbent-app export is currently registered in
+`benchmarks/manifest.json`. No physical accuracy gate is claimed.
 
-The supplied LiDAR archive is preserved under `benchmarks/raw/` and is replayable. It does not contain laser/tape ground truth, photo/video tiers, damage annotations, or incumbent-app exports, so those gates are intentionally not claimed.
+## Fixture replay
 
-## LiDAR replay
-
-The pipeline consumes the archive's depth frames, confidence maps, camera matrix, odometry and IMU. A deterministic subset fixture is also included for fast CI tests.
+The LiDAR pipeline consumes depth frames, confidence maps, camera intrinsics,
+odometry, and IMU from `fixtures/lidar_sample/`. This verifies the local data
+path only. The fixture has no independent dimensional ground truth.
 
 ## Gate table
 
@@ -16,10 +21,18 @@ The pipeline consumes the archive's depth frames, confidence maps, camera matrix
 |---|---|---|
 | Opening width <=2 cm on >=85% | NOT_RUN | opening ground truth not supplied |
 | Ceiling <=1.5 cm | NOT_RUN | laser height not supplied |
-| Repeatability | NOT_RUN | repeat capture not supplied |
-| Drift accountability | PARTIAL | pose-aware reconstruction path + explicit diagnostic |
-| Photo whole-property <=8% | NOT_RUN | photo benchmark not supplied |
-| Video <=3% | NOT_RUN | video benchmark not supplied |
+| Wall length <=8% | NOT_RUN | measured multi-room ground truth not supplied |
+| Whole-property floor area <=8% | NOT_RUN | measured property ground truth not supplied |
+| Adjacency graph | NOT_RUN | measured property graph not supplied |
+| Repeatability | NOT_RUN | paired physical captures not supplied |
+| Drift accountability | PARTIAL | pose-aware reconstruction path and fixture diagnostic; no ground-truth delta |
+| Photo whole-property <=8% | NOT_RUN | physical photo benchmark not supplied |
+| Video <=3% | NOT_RUN | physical video benchmark not supplied |
 | Incumbent >=70% dimensions | NOT_RUN | incumbent export not supplied |
+| Staged damage extent | NOT_RUN | annotated staged-damage capture not supplied |
 
-Do not replace these statuses with estimated or synthetic values.
+The evaluator emits per-measurement gate results only when corresponding
+ground-truth values exist. A partial measurement set cannot produce an overall
+`PASS`. Repeatability and incumbent comparison require paired captures/exports
+and remain outside the current single-capture evaluator. Do not replace these
+statuses with estimated or synthetic values.
