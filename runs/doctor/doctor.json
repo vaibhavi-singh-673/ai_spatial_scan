@@ -30,7 +30,8 @@
       "status": "READY",
       "details": {
         "version": "5.0.0",
-        "encode_decode": true
+        "encode_decode": true,
+        "error": null
       }
     },
     {
@@ -38,7 +39,8 @@
       "status": "READY",
       "details": {
         "fixture": "C:\\Users\\vaibhavi\\Desktop\\YC\\ai_spatial_solution\\fixtures\\video\\connector\\connector_walkthrough.mp4",
-        "first_frame_decoded": true
+        "first_frame_decoded": true,
+        "error": null
       }
     },
     {
@@ -55,14 +57,22 @@
       "status": "READY",
       "details": {
         "fixture_metadata_present": true,
-        "frame_sampling_limit": 120
+        "decoded_depth_frames": 7,
+        "imu_samples": 21339,
+        "sampled_depth_frames": 7,
+        "camera_matrix_shape": [
+          3,
+          3
+        ],
+        "frame_sampling_limit": 8
       }
     },
     {
       "name": "photo_tier",
       "status": "READY",
       "details": {
-        "still_decoder_ready": true
+        "still_decoder_ready": true,
+        "photo_fixture_decoded": true
       }
     },
     {

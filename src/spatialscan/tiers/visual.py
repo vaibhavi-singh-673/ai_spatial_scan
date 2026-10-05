@@ -131,7 +131,14 @@ def estimate_visual_plan(images, tier, scale_m_per_pixel=None, room_id="room_01"
         for candidate in detect_opening_candidates(frame_lines,frame_gray.shape[1],frame_gray.shape[0]):
             candidate["image"] = source_name
             opening_candidates.append(candidate)
-        for anomaly in detect_damage_candidates(frame):
+        surface_mappings = metadata.get("damage_surface_regions", {})
+        if isinstance(surface_mappings, list):
+            surface_regions = surface_mappings
+        elif isinstance(surface_mappings, dict):
+            surface_regions = surface_mappings.get(source_name, surface_mappings.get("default", []))
+        else:
+            surface_regions = []
+        for anomaly in detect_damage_candidates(frame, surface_regions):
             anomaly["image"] = source_name
             anomalies.append(anomaly)
     opening_candidates = opening_candidates[:100]
@@ -156,20 +163,38 @@ def estimate_visual_plan(images, tier, scale_m_per_pixel=None, room_id="room_01"
             "walls":walls,"openings":[]}
     for index,candidate in enumerate(opening_candidates,1):
         oid=f"opening_candidate_{index}"
-        usable_pixel_scale = (scale_m_per_pixel if scale_m_per_pixel is not None else
-                              scale_info["scale_m_per_pixel"] if scale_info["metric_scale_is_global"] else None)
-        width_m=candidate["width_px"]*usable_pixel_scale if usable_pixel_scale is not None else None
-        scale_uncertainty=scale_info.get("scale_uncertainty_m_per_pixel")
-        width_uncertainty=(candidate["width_px"]*scale_uncertainty if width_m is not None
-                           and scale_uncertainty is not None else None)
+        image_name = candidate.get("image")
+        wall_mappings = metadata.get("wall_homographies_image_to_m", {})
+        if not isinstance(wall_mappings, dict):
+            wall_mappings = {}
+        wall_homography = wall_mappings.get(image_name, wall_mappings.get("default"))
+        width_m, measurement_method = None, "NOT_ESTIMATED_NO_WALL_PLANE_CALIBRATION"
+        if wall_homography is not None:
+            matrix = np.asarray(wall_homography, dtype=float)
+            if matrix.shape == (3,3) and np.all(np.isfinite(matrix)):
+                x0, y0, x1, y1 = candidate["bbox_px"]
+                points = cv2.perspectiveTransform(np.asarray(
+                    [[[x0, (y0+y1)/2], [x1, (y0+y1)/2]]], dtype=np.float32), matrix)[0]
+                projected_width = float(np.linalg.norm(points[1]-points[0]))
+                if np.all(np.isfinite(points)) and projected_width > 0:
+                    width_m = projected_width
+                    measurement_method = "calibrated_wall_homography"
+        elif (metadata.get("opening_geometry_is_rectified") is True and
+              scale_info["scale_m_per_pixel"] is not None):
+            width_m = candidate["width_px"] * scale_info["scale_m_per_pixel"]
+            measurement_method = "rectified_opening_plane_and_measured_scale"
+        width_uncertainty = metadata.get("opening_width_uncertainty_m") if width_m is not None else None
         room["openings"].append({"id":oid,"room_id":room_id,"type":candidate["type"],
             "width":_measurement(width_m,"m","opening_width",room_id,oid,
-                 "explicit_uniform_pixel_scale_provisional",width_uncertainty),
+                 measurement_method,width_uncertainty),
             "detected":False,"candidate":True,"confidence":candidate["confidence"],
-            "review_required":True,"image_bbox_px":candidate["bbox_px"]})
+            "review_required":True,"image_bbox_px":candidate["bbox_px"],
+            "metric_projection":"CALIBRATED_WALL_PLANE" if width_m is not None else "PIXEL_CANDIDATE_ONLY"})
     damage=[{"id":f"damage_candidate_{i}","room_id":room_id,
-             "surface":f"image:{item.get('image','unknown')}","damage_class":item["damage_class"],
-             "extent_m2":None,"polygon_xy_m":[],"polygon_px":item["polygon_px"],
+             "surface":item.get("surface_id") or f"image:{item.get('image','unknown')}",
+             "damage_class":item["damage_class"],
+             "extent_m2":item.get("extent_m2"),"polygon_xy_m":item.get("surface_polygon_xy_m") or [],
+             "polygon_px":item["polygon_px"],
              "confidence":item["confidence"],"status":item["status"]}
             for i,item in enumerate(anomalies,1)]
     return {"schema_version":"1.0","capture_id":f"{tier}_capture_{len(imgs)}_frames","tier":tier,

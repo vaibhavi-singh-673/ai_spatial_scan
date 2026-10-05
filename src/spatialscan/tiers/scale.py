@@ -42,8 +42,8 @@ def _metadata_for(images, metadata_path=None):
     return None, {}
 
 
-def _qr_scale(images, marker_size_m, marker_uncertainty_m=0.0):
-    if not marker_size_m or marker_size_m <= 0:
+def _qr_scale(images, marker_size_m, marker_uncertainty_m=0.0, expected_payloads=None):
+    if not marker_size_m or marker_size_m <= 0 or not expected_payloads:
         return []
     detector = cv2.QRCodeDetector()
     scales = []
@@ -53,16 +53,19 @@ def _qr_scale(images, marker_size_m, marker_uncertainty_m=0.0):
         frame = cv2.imread(str(image))
         if frame is None:
             continue
-        ok, points = detector.detect(frame)
-        if not ok or points is None:
+        found, decoded, points, _ = detector.detectAndDecodeMulti(frame)
+        if not found or points is None:
             continue
         corners = np.asarray(points, dtype=float).reshape(-1, 4, 2)
-        for quad in corners:
+        for payload, quad in zip(decoded or (), corners):
+            if not payload or payload not in expected_payloads:
+                continue
             edges = np.linalg.norm(quad - np.roll(quad, -1, axis=0), axis=1)
             px = float(np.median(edges))
             if px > 2:
                 scales.append({"scale_m_per_pixel": float(marker_size_m) / px,
                                "source": "recognized_qr_known_size", "image": image.name,
+                               "decoded_payload": payload,
                                "reference_pixels": px, "reference_length_m": float(marker_size_m),
                                "scale_uncertainty_m_per_pixel": (float(marker_size_m) / px) * np.sqrt(
                                    (float(marker_uncertainty_m) / float(marker_size_m))**2 + (1.0 / px)**2),
@@ -109,7 +112,12 @@ def estimate_scale(images, declared_scale_m_per_pixel=None, metadata_path=None):
         marker_uncertainty = float(metadata.get("qr_marker_uncertainty_m", 0.0))
     except (TypeError, ValueError):
         marker_uncertainty = 0.0
-    candidates.extend(_qr_scale(images, marker_size, marker_uncertainty))
+    expected_payloads = metadata.get("qr_marker_payloads")
+    if isinstance(expected_payloads, str):
+        expected_payloads = [expected_payloads]
+    if not isinstance(expected_payloads, list):
+        expected_payloads = None
+    candidates.extend(_qr_scale(images, marker_size, marker_uncertainty, expected_payloads))
 
     references = metadata.get("scale_references", [])
     if not isinstance(references, list):

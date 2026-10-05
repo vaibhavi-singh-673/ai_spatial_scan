@@ -41,6 +41,23 @@ def optimize_room_graph(room_ids, constraints, use_all_edges=True):
                       "rotation_rad":values[2], "weight":weight})
     if not edges:
         return {"status": "NOT_RUN", "reason": "no verified relative room transforms"}
+    # Optional shared-wall line pairs constrain room poses in the global plane.
+    # Coordinates are measured in each room's local metric frame.
+    wall_pairs = []
+    for edge in edges:
+        alignment = edge.get("wall_alignment")
+        if not isinstance(alignment, dict):
+            continue
+        try:
+            wall_a = np.asarray(alignment["wall_a_xy_m"], dtype=float).reshape(2, 2)
+            wall_b = np.asarray(alignment["wall_b_xy_m"], dtype=float).reshape(2, 2)
+            weight = float(alignment.get("weight", edge["weight"]))
+            if not np.all(np.isfinite(wall_a)) or not np.all(np.isfinite(wall_b)) or weight <= 0:
+                continue
+            wall_pairs.append({"room_a":edge["room_a"],"room_b":edge["room_b"],
+                               "wall_a":wall_a,"wall_b":wall_b,"weight":weight})
+        except (KeyError, TypeError, ValueError):
+            continue
     # Use the same deterministic spanning tree as the uncorrected baseline;
     # non-tree constraints become held-out loop-closure measurements.
     tree, seen = [], {room_ids[0]}
@@ -82,6 +99,29 @@ def optimize_room_graph(room_ids, constraints, use_all_edges=True):
             error[2] = _wrap(error[2])
             weight = float(edge.get("weight", 1.0))
             values.extend(error * np.sqrt(max(weight, 1e-6)))
+        if use_all_edges:
+            for pair in wall_pairs:
+                pose_a = poses[index[pair["room_a"]]]
+                pose_b = poses[index[pair["room_b"]]]
+                def world_points(points, pose):
+                    c, s = np.cos(pose[2]), np.sin(pose[2])
+                    rotation = np.array([[c, -s], [s, c]])
+                    return points @ rotation.T + pose[:2]
+                a_points = world_points(pair["wall_a"], pose_a)
+                b_points = world_points(pair["wall_b"], pose_b)
+                direction = a_points[1] - a_points[0]
+                norm = np.linalg.norm(direction)
+                if norm < 1e-8:
+                    values.extend([100.0, 100.0, 100.0])
+                    continue
+                direction /= norm
+                normal = np.array([-direction[1], direction[0]])
+                line_distances = (b_points - a_points[0]) @ normal
+                b_direction = b_points[1] - b_points[0]
+                b_norm = np.linalg.norm(b_direction)
+                b_direction /= max(b_norm, 1e-8)
+                parallel_error = float(direction[0]*b_direction[1] - direction[1]*b_direction[0])
+                values.extend(np.r_[line_distances, parallel_error] * np.sqrt(pair["weight"]))
         return np.asarray(values)
 
     initial = np.zeros(max(0, (len(room_ids)-1)*3), dtype=float)
@@ -98,6 +138,17 @@ def optimize_room_graph(room_ids, constraints, use_all_edges=True):
         error[2] = _wrap(error[2])
         closure_residuals.append(float(np.linalg.norm(error[:2])))
     closure_error = float(np.mean(closure_residuals)) if closure_residuals else None
+    wall_alignment_errors = []
+    for pair in wall_pairs:
+        pose_a, pose_b = poses[index[pair["room_a"]]], poses[index[pair["room_b"]]]
+        def world_points(points, pose):
+            c, s = np.cos(pose[2]), np.sin(pose[2])
+            return points @ np.array([[c, -s], [s, c]]).T + pose[:2]
+        a_points, b_points = world_points(pair["wall_a"], pose_a), world_points(pair["wall_b"], pose_b)
+        direction = a_points[1] - a_points[0]
+        direction /= max(np.linalg.norm(direction), 1e-8)
+        normal = np.array([-direction[1], direction[0]])
+        wall_alignment_errors.extend(abs((b_points - a_points[0]) @ normal).tolist())
     return {"status":"PASS" if solution.success else "REVIEW",
             "poses":{room_id:{"x_m":float(poses[i,0]),"y_m":float(poses[i,1]),
                               "rotation_rad":float(poses[i,2])}
@@ -109,6 +160,9 @@ def optimize_room_graph(room_ids, constraints, use_all_edges=True):
                 for i,edge in enumerate(edges)},
             "closure_edge_count":len(closure_edges),"closure_error_m":closure_error,
             "closure_error_status":"MEASURED_HELD_OUT_CONSTRAINTS" if closure_edges else "NOT_RUN_NO_CLOSURE_EDGES",
+            "wall_alignment_constraints_used":len(wall_pairs) if use_all_edges else 0,
+            "mean_wall_plane_error_m":float(np.mean(wall_alignment_errors))
+                if wall_alignment_errors and use_all_edges else None,
             "loop_closure_applied":bool(use_all_edges and closure_edges),
             "optimizer":"scipy.least_squares_huber","success":bool(solution.success)}
 

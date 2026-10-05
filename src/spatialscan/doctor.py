@@ -36,24 +36,38 @@ def run_doctor(output_dir="runs/doctor", output_json=None):
     cv2_ready = dependencies["opencv"]
     still_ready = False
     video_ready = False
+    photo_fixture_ready = False
+    decoder_error = None
     if cv2_ready:
-        cv2 = importlib.import_module("cv2")
-        import numpy as np
-        sample = np.zeros((16, 16, 3), dtype=np.uint8)
-        encoded, payload = cv2.imencode(".png", sample)
-        decoded = cv2.imdecode(payload, cv2.IMREAD_COLOR) if encoded else None
-        still_ready = decoded is not None and decoded.shape[:2] == (16, 16)
+        try:
+            cv2 = importlib.import_module("cv2")
+            import numpy as np
+            sample = np.zeros((16, 16, 3), dtype=np.uint8)
+            encoded, payload = cv2.imencode(".png", sample)
+            decoded = cv2.imdecode(payload, cv2.IMREAD_COLOR) if encoded else None
+            still_ready = decoded is not None and decoded.shape[:2] == (16, 16)
+            photos = sorted(path for path in (project_root / "fixtures" / "photo").rglob("*")
+                            if path.suffix.lower() in {".jpg", ".jpeg", ".png", ".bmp", ".tif", ".tiff"})
+            photo_decoded = None
+            for path in photos:
+                photo_decoded = cv2.imread(str(path))
+                if photo_decoded is not None:
+                    break
+            photo_fixture_ready = photo_decoded is not None
+            videos = sorted((project_root / "fixtures" / "video").rglob("*.mp4"))
+            if videos:
+                capture = cv2.VideoCapture(str(videos[0]))
+                video_ok, frame = capture.read()
+                capture.release()
+                video_ready = bool(video_ok and frame is not None)
+        except Exception as error:
+            decoder_error = str(error)
         checks.append(_check("opencv_still_decoder", still_ready,
-                             {"version": cv2.__version__, "encode_decode": still_ready}))
-        videos = sorted((project_root / "fixtures" / "video").rglob("*.mp4"))
-        if videos:
-            capture = cv2.VideoCapture(str(videos[0]))
-            video_ok, frame = capture.read()
-            capture.release()
-            video_ready = bool(video_ok and frame is not None)
+                             {"version": getattr(locals().get("cv2"), "__version__", None),
+                              "encode_decode": still_ready, "error": decoder_error}))
         checks.append(_check("opencv_video_decoder", video_ready,
-                             {"fixture": str(videos[0]) if videos else None,
-                              "first_frame_decoded": video_ready}))
+                             {"fixture": str(videos[0]) if "videos" in locals() and videos else None,
+                              "first_frame_decoded": video_ready, "error": decoder_error}))
     else:
         checks.extend([
             _check("opencv_still_decoder", False, {"reason": "opencv dependency unavailable"}),
@@ -72,12 +86,30 @@ def run_doctor(output_dir="runs/doctor", output_json=None):
     checks.append(_check("configuration", config_ready,
                          {"path": str(config_path), "valid_yaml": config_ready, "error": config_error}))
 
-    lidar_ready = all((project_root / "fixtures" / "lidar_sample" / name).is_file()
-                      for name in ("camera_matrix.csv", "odometry.csv", "imu.csv"))
+    lidar_root = project_root / "fixtures" / "lidar_sample"
+    lidar_metadata_present = all((lidar_root / name).is_file()
+                                 for name in ("camera_matrix.csv", "odometry.csv", "imu.csv"))
+    lidar_ready = False
+    lidar_details = {"fixture_metadata_present": lidar_metadata_present, "decoded_depth_frames": 0,
+                     "imu_samples": 0}
+    if lidar_metadata_present and cv2_ready:
+        try:
+            from .io.lidar import load_lidar
+            matrix, frames, imu = load_lidar(lidar_root, max_frames=8)
+            decoded_depth = sum(depth is not None for _, depth, _, _ in frames)
+            lidar_ready = matrix.shape == (3, 3) and decoded_depth > 0 and bool(imu)
+            lidar_details.update({"decoded_depth_frames": decoded_depth,
+                                  "sampled_depth_frames": len(frames), "imu_samples": len(imu),
+                                  "camera_matrix_shape": list(matrix.shape)})
+        except Exception as error:
+            lidar_details["error"] = str(error)
+    lidar_details["fixture_metadata_present"] = lidar_metadata_present
+    lidar_details["frame_sampling_limit"] = 8
     checks.append(_check("lidar_tier", lidar_ready,
-                         {"fixture_metadata_present": lidar_ready, "frame_sampling_limit": 120}))
-    checks.append(_check("photo_tier", still_ready,
-                         {"still_decoder_ready": still_ready}))
+                         lidar_details))
+    checks.append(_check("photo_tier", still_ready and photo_fixture_ready,
+                         {"still_decoder_ready": still_ready,
+                          "photo_fixture_decoded": photo_fixture_ready}))
     checks.append(_check("video_tier", video_ready,
                          {"video_decoder_ready": video_ready}))
 
@@ -123,7 +155,7 @@ def run_doctor(output_dir="runs/doctor", output_json=None):
     blocked = [item["name"] for item in checks if item["status"] == "BLOCKED"]
     report = {"schema_version": "1.0", "status": "READY" if not blocked else "BLOCKED",
               "python": platform.python_version(), "checks": checks,
-              "blocked": blocked, "tiers": {"PHOTO": "READY" if still_ready else "BLOCKED",
+              "blocked": blocked, "tiers": {"PHOTO": "READY" if still_ready and photo_fixture_ready else "BLOCKED",
               "VIDEO": "READY" if video_ready else "BLOCKED",
               "LIDAR": "READY" if lidar_ready and cv2_ready else "BLOCKED",
               "OUTPUT": "READY" if output_ready else "BLOCKED",
