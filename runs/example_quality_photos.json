@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "tier": "photos",
+  "input": "fixtures\\photo",
+  "readiness": "REVIEW",
+  "score": 80,
+  "checks": [
+    {
+      "name": "image_found",
+      "status": "PASS",
+      "weight": 20,
+      "details": {
+        "files": [
+          "connector\\synthetic_connector_01.png",
+          "connector\\synthetic_connector_02.png",
+          "room_01\\synthetic_room_01.png",
+          "room_02\\synthetic_room_02_01.png",
+          "room_02\\synthetic_room_02_02.png",
+          "room_03\\synthetic_room_03_01.png",
+          "room_03\\synthetic_room_03_02.png"
+        ]
+      },
+      "blocking": true
+    },
+    {
+      "name": "images_decoded",
+      "status": "PASS",
+      "weight": 35,
+      "details": {
+        "decoded_images": 7
+      },
+      "blocking": true
+    },
+    {
+      "name": "room_view_count",
+      "status": "PASS",
+      "weight": 15,
+      "details": {
+        "decoded_images": 7,
+        "recommended_range": [
+          2,
+          8
+        ]
+      },
+      "blocking": false
+    },
+    {
+      "name": "usable_resolution",
+      "status": "PASS",
+      "weight": 10,
+      "details": {
+        "width": 900,
+        "height": 500
+      },
+      "blocking": false
+    },
+    {
+      "name": "metric_calibration_declared",
+      "status": "FAIL",
+      "weight": 20,
+      "details": {
+        "reason": "Monocular scale requires a measured reference or calibration source"
+      },
+      "blocking": false
+    }
+  ],
+  "recommendations": [
+    "Add a measured scale reference before making metric accuracy claims."
+  ]
+}

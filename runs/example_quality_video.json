@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0",
+  "tier": "video",
+  "input": "fixtures\\video",
+  "readiness": "REVIEW",
+  "score": 80,
+  "checks": [
+    {
+      "name": "video_file_found",
+      "status": "PASS",
+      "weight": 20,
+      "details": {
+        "files": [
+          "connector\\connector_walkthrough.mp4",
+          "room_01\\room_01_walkthrough.mp4",
+          "room_02\\room_02_walkthrough.mp4",
+          "room_03\\room_03_walkthrough.mp4"
+        ]
+      },
+      "blocking": true
+    },
+    {
+      "name": "frames_decoded",
+      "status": "PASS",
+      "weight": 35,
+      "details": {
+        "decoded_frames": 9
+      },
+      "blocking": true
+    },
+    {
+      "name": "minimum_frame_count",
+      "status": "PASS",
+      "weight": 15,
+      "details": {
+        "decoded_frames": 9,
+        "minimum": 3
+      },
+      "blocking": false
+    },
+    {
+      "name": "usable_resolution",
+      "status": "PASS",
+      "weight": 10,
+      "details": {
+        "width": 900,
+        "height": 500
+      },
+      "blocking": false
+    },
+    {
+      "name": "metric_calibration_declared",
+      "status": "FAIL",
+      "weight": 20,
+      "details": {
+        "reason": "Monocular scale requires a measured reference or calibration source"
+      },
+      "blocking": false
+    }
+  ],
+  "recommendations": [
+    "Add a measured scale reference before making metric accuracy claims."
+  ]
+}

@@ -38,6 +38,7 @@ def main():
     f=sub.add_parser("fixloop", help="Run before/after LiDAR fix-loop ablation")
     f.add_argument("--input",required=True)
     f.add_argument("--output",required=True)
+    f.add_argument("--ground-truth", help="Optional measured ground-truth JSON for before/after gate evaluation")
     args=ap.parse_args()
     if args.cmd=="run":
         if args.tier=="lidar": result=lidar_run(args.input,Path(args.output).stem)
@@ -66,7 +67,7 @@ def main():
         Path(args.output).write_text(json.dumps(out,indent=2))
         print(json.dumps(out,indent=2))
     elif args.cmd=="fixloop":
-        out=run_fix_loop(args.input,args.output)
+        out=run_fix_loop(args.input,args.output,args.ground_truth)
         print(json.dumps(out,indent=2))
     else:
         out=run_benchmark(args.manifest,args.output)

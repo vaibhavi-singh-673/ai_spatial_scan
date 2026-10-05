@@ -19,6 +19,7 @@ def audit_submission(root):
     captures = manifest.get("captures", [])
     tiers = {row.get("tier") for row in captures}
     real_rows = []
+    raw_rows = []
     gt_rows = []
     incumbent_rows = []
     condition_tags = set()
@@ -26,25 +27,38 @@ def audit_submission(root):
     fixloop_report = (root / "runs" / "fixloop_lidar.json").exists()
 
     for row in captures:
-        raw = (root / row.get("raw_path", "")).resolve()
-        ground_truth = (root / row.get("ground_truth_path", "")).resolve()
-        incumbent = (root / row.get("incumbent_export", "")).resolve()
-        if raw.exists():
-            real_rows.append(row)
-        if ground_truth.exists():
+        raw_path = row.get("raw_path")
+        gt_path = row.get("ground_truth_path")
+        incumbent_path = row.get("incumbent_export")
+        raw = (root / raw_path).resolve() if raw_path else None
+        ground_truth = (root / gt_path).resolve() if gt_path else None
+        incumbent = (root / incumbent_path).resolve() if incumbent_path else None
+        if raw and raw.exists():
+            raw_rows.append(row)
+        if ground_truth and ground_truth.exists():
             gt_rows.append(row)
-        if incumbent.exists():
+            if row.get("evidence_class") in {"measured", "author_collected"} and raw and raw.exists():
+                real_rows.append(row)
+        if incumbent and incumbent.exists():
             incumbent_rows.append(row)
         condition_tags.update(row.get("conditions", []))
         repeat = row.get("repeat_group")
         if repeat:
             repeat_groups.setdefault(repeat, []).append(row)
 
-    repeated = any(len(rows) >= 2 for rows in repeat_groups.values())
+    repeatability_pairs = []
+    for group, rows in repeat_groups.items():
+        eligible = [row for row in rows if (root / row.get("raw_path", "")).resolve().exists()]
+        for index, first in enumerate(eligible):
+            for second in eligible[index + 1:]:
+                if first.get("tier") == second.get("tier") and set(first.get("rooms", [])) == set(second.get("rooms", [])):
+                    repeatability_pairs.append({"group": group,
+                                                "capture_ids": [first.get("capture_id"), second.get("capture_id")]})
+    repeated = bool(repeatability_pairs)
     adversarial = {"mirrors", "glass", "wet-look", "low-light", "clutter"}
     items = [
         _item("walk_in", 30, "PASS" if real_rows and gt_rows else "BLOCKED",
-              f"{len(real_rows)} real capture rows, {len(gt_rows)} ground-truth rows",
+              f"{len(raw_rows)} raw files registered; {len(real_rows)} explicitly classified measured rows with ground truth",
               "Add a real capture and laser/tape ground truth to benchmarks/"),
         _item(
             "fix_loop", 25,
@@ -55,8 +69,8 @@ def audit_submission(root):
             if fixloop_report else "Record before/after gate values on identical raw data",
         ),
         _item("three_tier_accuracy", 15,
-              "PASS" if {"photos", "video", "lidar"} <= tiers and len(gt_rows) >= 3 else "BLOCKED",
-              f"Manifest tiers: {sorted(tiers)}; evaluated rows: {len(gt_rows)}",
+              "PASS" if {"photos", "video", "lidar"} <= tiers and len(real_rows) >= 3 else "BLOCKED",
+              f"Manifest tiers: {sorted(tiers)}; measured rows with ground truth: {len(real_rows)}",
               "Add measured photo, video, and LiDAR rows with ground truth"),
         _item("compliance", 10,
               "PASS" if (root / "docs/compliance_matrix.md").exists() else "BLOCKED",
@@ -91,6 +105,7 @@ def audit_submission(root):
         "review_weight": review,
         "rubric": items,
         "repeat_groups": {key: len(value) for key, value in repeat_groups.items()},
+        "repeatability_pairs_ready": repeatability_pairs,
         "repeatability_ready": repeated,
         "recommendation": "Collect real benchmark evidence before claiming accuracy or selection readiness.",
     }

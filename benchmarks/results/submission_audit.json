@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0",
+  "status": "READY_FOR_COLLECTION",
+  "evidence_score": 20,
+  "review_weight": 25,
+  "rubric": [
+    {
+      "name": "walk_in",
+      "weight": 30,
+      "status": "BLOCKED",
+      "evidence": "3 raw files registered; 0 explicitly classified measured rows with ground truth",
+      "next_step": "Add a real capture and laser/tape ground truth to benchmarks/"
+    },
+    {
+      "name": "fix_loop",
+      "weight": 25,
+      "status": "REVIEW",
+      "evidence": "Measured fixture ablation exists; laser/tape accuracy delta is absent",
+      "next_step": "Add laser/tape ground truth and record before/after gate values"
+    },
+    {
+      "name": "three_tier_accuracy",
+      "weight": 15,
+      "status": "BLOCKED",
+      "evidence": "Manifest tiers: ['lidar']; measured rows with ground truth: 0",
+      "next_step": "Add measured photo, video, and LiDAR rows with ground truth"
+    },
+    {
+      "name": "compliance",
+      "weight": 10,
+      "status": "PASS",
+      "evidence": "Compliance matrix and source artifacts present",
+      "next_step": "Keep partial items explicitly labeled"
+    },
+    {
+      "name": "incumbent",
+      "weight": 10,
+      "status": "BLOCKED",
+      "evidence": "0 incumbent exports found",
+      "next_step": "Preserve a magicplan or Polycam export for shared rooms"
+    },
+    {
+      "name": "capture_route",
+      "weight": 5,
+      "status": "PASS",
+      "evidence": "Capture protocol and cold-run script present",
+      "next_step": "Have a non-engineer follow the route and record install time"
+    },
+    {
+      "name": "process",
+      "weight": 5,
+      "status": "PASS",
+      "evidence": "CI workflow and test suite present",
+      "next_step": "Keep benchmark changes auditable in Git history"
+    },
+    {
+      "name": "difficult_conditions",
+      "weight": 0,
+      "status": "BLOCKED",
+      "evidence": "Tagged conditions: ['ceiling_label_from_filename', 'floor_only_label_from_filename']",
+      "next_step": "Collect mirrors, glass, wet-look, low-light, and clutter cases"
+    }
+  ],
+  "repeat_groups": {},
+  "repeatability_pairs_ready": [],
+  "repeatability_ready": false,
+  "recommendation": "Collect real benchmark evidence before claiming accuracy or selection readiness."
+}

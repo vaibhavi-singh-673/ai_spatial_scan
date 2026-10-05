@@ -14,12 +14,16 @@ def read_odometry(path):
                 rows.append(r)
     return rows
 
-def load_lidar(folder):
+def load_lidar(folder, max_frames=None):
     folder=Path(folder)
     K=read_matrix(folder/"camera_matrix.csv")
     odom=read_odometry(folder/"odometry.csv")
     frames=[]
-    for p in sorted((folder/"depth").glob("*.png")):
+    depth_paths=sorted((folder/"depth").glob("*.png"))
+    if max_frames and len(depth_paths)>max_frames:
+        indices=np.linspace(0,len(depth_paths)-1,max_frames).astype(int)
+        depth_paths=[depth_paths[index] for index in indices]
+    for p in depth_paths:
         conf=folder/"confidence"/p.name
         d=cv2.imread(str(p), cv2.IMREAD_UNCHANGED)
         c=cv2.imread(str(conf), cv2.IMREAD_GRAYSCALE) if conf.exists() else None

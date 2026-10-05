@@ -32,7 +32,7 @@ The project is local-only. It does not call a hosted backend, upload captures, o
 - Multi-room graph representation and drift-correction hooks.
 - Opening/damage/scope schemas.
 - Ground-truth comparison and gate evaluation.
-- Fixture ablation report generation; repeatability remains pending paired captures.
+- Fixture ablation report generation and repeat-capture comparison infrastructure.
 - Before/after fix-loop structure.
 - Deterministic fixture replay.
 - Windows/macOS/Linux setup.
@@ -216,8 +216,10 @@ turns a fixture replay into an accuracy claim.
 See [`benchmarks/README.md`](benchmarks/README.md) for the smoke/benchmark data
 boundary, capture storage policy, and cold reproduction commands. The current
 manifest is intentionally empty; it is not evidence that a physical benchmark
-has been run. Repeatability and incumbent comparisons remain `NOT_RUN` until
-paired repeated captures and original app exports are collected and reviewed.
+has been run. Repeatability remains `NOT_RUN` until paired captures are
+collected; the runner reports deltas and only assigns PASS/FAIL when documented
+tolerances are supplied. Incumbent comparisons still require original app
+exports and review.
 
 Audit the submission against the scoring rubric:
 
@@ -236,6 +238,16 @@ python -m spatialscan fixloop --input fixtures/lidar_sample --output runs/fixloo
 
 This produces a measured before/after ablation for the pose/IMU repair, but it
 is explicitly not an accuracy result until laser/tape ground truth is added.
+For an actual measured room, add `--ground-truth <measured.json>`; the report
+will include before/after gate evaluations and numeric metric deltas. See
+[`docs/fix_loop.md`](docs/fix_loop.md).
+
+The benchmark runner also compares repeat-group pairs and records local
+processing time. To run the cold reproduction profile and save its timing
+record, use [`docs/walk_in_protocol.md`](docs/walk_in_protocol.md). A local
+timing record is not a substitute for the physical unassisted walk-in study.
+Incumbent head-to-head measurement comparison uses the normalized export
+format in [`docs/incumbent_comparison_template.md`](docs/incumbent_comparison_template.md).
 
 The manifest records every capture, device, tier, repeated-room pair, raw-data hash, ground-truth source and incumbent-app export.
 
@@ -262,7 +274,7 @@ This repository is a local three-tier indoor spatial reconstruction pipeline:
 - `fixtures/video/` contains separate synthetic H.264 MP4 smoke videos for Room 1, Room 2, Room 3, and the connector.
 - `configs/` contains reference YAML settings. The CLI does not load a config file yet.
 - `models/` contains only `README.md`. No model weights are included or required by the current geometry/OpenCV implementation.
-- `benchmarks/` contains the manifest, example ground truth, and benchmark documentation. Raw captures and generated results are ignored.
+- `benchmarks/` contains three registered raw LiDAR ZIP archives, the manifest, example ground truth, and benchmark documentation. Archive replay outputs and timing are in `benchmarks/results/`; the ZIPs have SHA-256 digests in `benchmarks/raw/SHA256SUMS.txt`.
 - `runs/` stores generated JSON and rendered outputs and is intentionally ignored by Git.
 - `tests/` contains the automated checks for evaluation, LiDAR fixtures, geometry, photo input, and MP4 video input.
 - `web/` contains a zero-install visual dashboard for quality and reconstruction JSON reports.

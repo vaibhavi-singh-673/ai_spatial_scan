@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "tier": "lidar",
+  "input": "fixtures\\lidar_sample",
+  "readiness": "READY_WITH_CAVEATS",
+  "score": 100,
+  "checks": [
+    {
+      "name": "required_metadata",
+      "status": "PASS",
+      "weight": 25,
+      "details": {
+        "missing": []
+      },
+      "blocking": true
+    },
+    {
+      "name": "camera_matrix",
+      "status": "PASS",
+      "weight": 20,
+      "details": {
+        "shape": [
+          3,
+          3
+        ]
+      },
+      "blocking": true
+    },
+    {
+      "name": "depth_frames_decoded",
+      "status": "PASS",
+      "weight": 25,
+      "details": {
+        "decoded": 7,
+        "total": 7
+      },
+      "blocking": true
+    },
+    {
+      "name": "confidence_coverage",
+      "status": "PASS",
+      "weight": 10,
+      "details": {
+        "with_confidence": 7,
+        "depth_frames": 7
+      },
+      "blocking": false
+    },
+    {
+      "name": "pose_coverage",
+      "status": "PASS",
+      "weight": 10,
+      "details": {
+        "with_pose": 7,
+        "depth_frames": 7
+      },
+      "blocking": false
+    },
+    {
+      "name": "imu_samples",
+      "status": "PASS",
+      "weight": 10,
+      "details": {
+        "samples": 21339
+      },
+      "blocking": false
+    }
+  ],
+  "recommendations": []
+}

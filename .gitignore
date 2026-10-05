@@ -7,21 +7,10 @@ __pycache__/
 .env.*
 !.env.example
 
-# Generated run and evaluation outputs
-runs/*
-benchmarks/results/*
-
 # Large or private benchmark captures
-benchmarks/raw/*
-
-# Downloaded model weights are kept outside version control.
-models/*
-!models/README.md
-!models/.gitkeep
-
-# Local generated artifacts
-/result.json
-/result.png
+benchmarks/raw/single_scan_with_ceiling.zip
+benchmarks/raw/single_scan_floor_only.zip
+benchmarks/raw/single_room.zip
 
 # Editor and operating-system files
 .vscode/

@@ -16,6 +16,11 @@ captures and laser/tape measurements.
 
 No synthetic fixture is used as accuracy evidence. The fixture commands prove
 replayability, decoding, schema production, and failure handling only.
+Three supplied LiDAR archives are now also replayed as `raw_capture_unverified`
+inputs. Their 120-frame sampled processing results are in
+`benchmarks/results/benchmark.json`; missing ground truth keeps the accuracy
+and walk-in rubric sections blocked. The current audit score remains 20 verified
+points and 25 points under review.
 
 Run `python -m spatialscan audit` to generate the current machine-readable
 evidence score. The audit currently reports 20 verified points, 25 points under

@@ -1,0 +1,283 @@
+{
+  "schema_version": "1.0",
+  "manifest": "C:\\Users\\vaibhavi\\Desktop\\YC\\ai_spatial_solution\\benchmarks\\manifest.json",
+  "captures": [
+    {
+      "capture_id": "raw_single_room",
+      "tier": "lidar",
+      "quality": {
+        "schema_version": "1.0",
+        "tier": "lidar",
+        "input": "benchmarks/raw/single_room.zip",
+        "readiness": "READY_WITH_CAVEATS",
+        "score": 100,
+        "checks": [
+          {
+            "name": "required_metadata",
+            "status": "PASS",
+            "weight": 25,
+            "details": {
+              "missing": []
+            },
+            "blocking": true
+          },
+          {
+            "name": "camera_matrix",
+            "status": "PASS",
+            "weight": 20,
+            "details": {
+              "shape": [
+                3,
+                3
+              ]
+            },
+            "blocking": true
+          },
+          {
+            "name": "depth_frames_decoded",
+            "status": "PASS",
+            "weight": 25,
+            "details": {
+              "decoded_sample": 120,
+              "sampled_total": 120,
+              "available_total": 1715,
+              "sampling_limit": 120
+            },
+            "blocking": true
+          },
+          {
+            "name": "confidence_coverage",
+            "status": "PASS",
+            "weight": 10,
+            "details": {
+              "with_confidence": 120,
+              "sampled_depth_frames": 120
+            },
+            "blocking": false
+          },
+          {
+            "name": "pose_coverage",
+            "status": "PASS",
+            "weight": 10,
+            "details": {
+              "with_pose": 120,
+              "sampled_depth_frames": 120
+            },
+            "blocking": false
+          },
+          {
+            "name": "imu_samples",
+            "status": "PASS",
+            "weight": 10,
+            "details": {
+              "samples": 3689
+            },
+            "blocking": false
+          }
+        ],
+        "recommendations": []
+      },
+      "evaluation": null,
+      "status": "NOT_RUN",
+      "pipeline_status": "COMPLETED",
+      "prediction_path": "C:\\Users\\vaibhavi\\Desktop\\YC\\ai_spatial_solution\\benchmarks\\results\\raw_single_room_prediction.json",
+      "processing_seconds": 11.611990700002934,
+      "performance_evidence": "local_recorded_capture_processing_only",
+      "ground_truth": null,
+      "ground_truth_status": "NOT_RUN",
+      "incumbent_export": null,
+      "incumbent_status": "NOT_RUN",
+      "incumbent_comparison": {
+        "status": "NOT_RUN",
+        "reason": "add an incumbent_measurements CSV and measured ground truth"
+      },
+      "evidence_class": "raw_capture_unverified"
+    },
+    {
+      "capture_id": "raw_single_scan_floor_only",
+      "tier": "lidar",
+      "quality": {
+        "schema_version": "1.0",
+        "tier": "lidar",
+        "input": "benchmarks/raw/single_scan_floor_only.zip",
+        "readiness": "READY_WITH_CAVEATS",
+        "score": 100,
+        "checks": [
+          {
+            "name": "required_metadata",
+            "status": "PASS",
+            "weight": 25,
+            "details": {
+              "missing": []
+            },
+            "blocking": true
+          },
+          {
+            "name": "camera_matrix",
+            "status": "PASS",
+            "weight": 20,
+            "details": {
+              "shape": [
+                3,
+                3
+              ]
+            },
+            "blocking": true
+          },
+          {
+            "name": "depth_frames_decoded",
+            "status": "PASS",
+            "weight": 25,
+            "details": {
+              "decoded_sample": 120,
+              "sampled_total": 120,
+              "available_total": 5251,
+              "sampling_limit": 120
+            },
+            "blocking": true
+          },
+          {
+            "name": "confidence_coverage",
+            "status": "PASS",
+            "weight": 10,
+            "details": {
+              "with_confidence": 120,
+              "sampled_depth_frames": 120
+            },
+            "blocking": false
+          },
+          {
+            "name": "pose_coverage",
+            "status": "PASS",
+            "weight": 10,
+            "details": {
+              "with_pose": 120,
+              "sampled_depth_frames": 120
+            },
+            "blocking": false
+          },
+          {
+            "name": "imu_samples",
+            "status": "PASS",
+            "weight": 10,
+            "details": {
+              "samples": 11397
+            },
+            "blocking": false
+          }
+        ],
+        "recommendations": []
+      },
+      "evaluation": null,
+      "status": "NOT_RUN",
+      "pipeline_status": "COMPLETED",
+      "prediction_path": "C:\\Users\\vaibhavi\\Desktop\\YC\\ai_spatial_solution\\benchmarks\\results\\raw_single_scan_floor_only_prediction.json",
+      "processing_seconds": 33.87766379999812,
+      "performance_evidence": "local_recorded_capture_processing_only",
+      "ground_truth": null,
+      "ground_truth_status": "NOT_RUN",
+      "incumbent_export": null,
+      "incumbent_status": "NOT_RUN",
+      "incumbent_comparison": {
+        "status": "NOT_RUN",
+        "reason": "add an incumbent_measurements CSV and measured ground truth"
+      },
+      "evidence_class": "raw_capture_unverified"
+    },
+    {
+      "capture_id": "raw_single_scan_with_ceiling",
+      "tier": "lidar",
+      "quality": {
+        "schema_version": "1.0",
+        "tier": "lidar",
+        "input": "benchmarks/raw/single_scan_with_ceiling.zip",
+        "readiness": "READY_WITH_CAVEATS",
+        "score": 90,
+        "checks": [
+          {
+            "name": "required_metadata",
+            "status": "PASS",
+            "weight": 25,
+            "details": {
+              "missing": []
+            },
+            "blocking": true
+          },
+          {
+            "name": "camera_matrix",
+            "status": "PASS",
+            "weight": 20,
+            "details": {
+              "shape": [
+                3,
+                3
+              ]
+            },
+            "blocking": true
+          },
+          {
+            "name": "depth_frames_decoded",
+            "status": "PASS",
+            "weight": 25,
+            "details": {
+              "decoded_sample": 120,
+              "sampled_total": 120,
+              "available_total": 5757,
+              "sampling_limit": 120
+            },
+            "blocking": true
+          },
+          {
+            "name": "confidence_coverage",
+            "status": "FAIL",
+            "weight": 10,
+            "details": {
+              "with_confidence": 70,
+              "sampled_depth_frames": 120
+            },
+            "blocking": false
+          },
+          {
+            "name": "pose_coverage",
+            "status": "PASS",
+            "weight": 10,
+            "details": {
+              "with_pose": 120,
+              "sampled_depth_frames": 120
+            },
+            "blocking": false
+          },
+          {
+            "name": "imu_samples",
+            "status": "PASS",
+            "weight": 10,
+            "details": {
+              "samples": 21339
+            },
+            "blocking": false
+          }
+        ],
+        "recommendations": [
+          "Fix confidence_coverage: {'with_confidence': 70, 'sampled_depth_frames': 120}."
+        ]
+      },
+      "evaluation": null,
+      "status": "NOT_RUN",
+      "pipeline_status": "COMPLETED",
+      "prediction_path": "C:\\Users\\vaibhavi\\Desktop\\YC\\ai_spatial_solution\\benchmarks\\results\\raw_single_scan_with_ceiling_prediction.json",
+      "processing_seconds": 38.838361000001896,
+      "performance_evidence": "local_recorded_capture_processing_only",
+      "ground_truth": null,
+      "ground_truth_status": "NOT_RUN",
+      "incumbent_export": null,
+      "incumbent_status": "NOT_RUN",
+      "incumbent_comparison": {
+        "status": "NOT_RUN",
+        "reason": "add an incumbent_measurements CSV and measured ground truth"
+      },
+      "evidence_class": "raw_capture_unverified"
+    }
+  ],
+  "repeatability": {},
+  "repeatability_tolerances": {}
+}

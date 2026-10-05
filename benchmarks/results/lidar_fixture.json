@@ -1,0 +1,19 @@
+{
+  "status": "FAIL",
+  "gates": {
+    "ceiling_height": {
+      "max_error_m": 4.707913507342141,
+      "status": "FAIL",
+      "tolerance_m": 0.015
+    },
+    "whole_property_footprint": {
+      "error_fraction": 0.04856656462708372,
+      "status": "PASS",
+      "tolerance_fraction": 0.08
+    },
+    "wall_length": {
+      "status": "NOT_RUN",
+      "reason": "ordered wall ground truth not supplied"
+    }
+  }
+}

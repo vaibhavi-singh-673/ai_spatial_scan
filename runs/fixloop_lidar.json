@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "input": "fixtures\\lidar_sample",
+  "status": "ABLATION_ONLY",
+  "ground_truth_status": "NOT_AVAILABLE",
+  "before": {
+    "method": "single camera frame; poses and IMU disabled",
+    "area_m2": 6.902304501977776,
+    "ceiling_m": 1.9552982458092616
+  },
+  "after": {
+    "method": "pose-normalized points with IMU gravity constraint",
+    "area_m2": 12.582798775525005,
+    "ceiling_m": 7.207913507342141
+  },
+  "delta": {
+    "area_m2": 5.680494273547229,
+    "ceiling_m": 5.252615261532879
+  },
+  "interpretation": "This demonstrates a deterministic fix-loop delta. It is not an accuracy result without laser/tape ground truth."
+}

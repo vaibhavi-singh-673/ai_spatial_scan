@@ -1,9 +1,46 @@
 {
   "version": 1,
-  "captures": [],
+  "captures": [
+    {
+      "capture_id": "raw_single_room",
+      "tier": "lidar",
+      "device": "not recorded in archive",
+      "rooms": ["room_01"],
+      "raw_path": "benchmarks/raw/single_room.zip",
+      "ground_truth_path": null,
+      "repeat_group": null,
+      "incumbent_export": null,
+      "conditions": [],
+      "evidence_class": "raw_capture_unverified"
+    },
+    {
+      "capture_id": "raw_single_scan_floor_only",
+      "tier": "lidar",
+      "device": "not recorded in archive",
+      "rooms": ["room_01"],
+      "raw_path": "benchmarks/raw/single_scan_floor_only.zip",
+      "ground_truth_path": null,
+      "repeat_group": null,
+      "incumbent_export": null,
+      "conditions": ["floor_only_label_from_filename"],
+      "evidence_class": "raw_capture_unverified"
+    },
+    {
+      "capture_id": "raw_single_scan_with_ceiling",
+      "tier": "lidar",
+      "device": "not recorded in archive",
+      "rooms": ["room_01"],
+      "raw_path": "benchmarks/raw/single_scan_with_ceiling.zip",
+      "ground_truth_path": null,
+      "repeat_group": null,
+      "incumbent_export": null,
+      "conditions": ["ceiling_label_from_filename"],
+      "evidence_class": "raw_capture_unverified"
+    }
+  ],
   "required_fields": [
     "capture_id","tier","device","rooms","raw_path","ground_truth_path",
     "repeat_group","incumbent_export"
   ],
-  "notes": "Populate only with measured captures. Never synthesize gate results."
+  "notes": "Three supplied LiDAR archives are registered for pipeline replay only. Device/room identity, independent laser or tape measurements, repeat protocol and incumbent exports are not present. Do not treat these rows as accuracy benchmark evidence."
 }

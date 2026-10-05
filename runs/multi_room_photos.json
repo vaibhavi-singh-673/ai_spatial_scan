@@ -1,0 +1,259 @@
+{
+  "schema_version": "1.0",
+  "capture_id": "photos_capture_2_rooms",
+  "tier": "photos",
+  "device": {
+    "source": "iPhone stills/video",
+    "images_used": 4,
+    "frame_width_px": 1440,
+    "frame_height_px": 1080,
+    "rooms_detected": 2
+  },
+  "rooms": [
+    {
+      "id": "room_01",
+      "name": "Room 01",
+      "polygon_xy_m": [
+        [
+          0,
+          0
+        ],
+        [
+          1.0,
+          0
+        ],
+        [
+          1.0,
+          0.75
+        ],
+        [
+          0,
+          0.75
+        ]
+      ],
+      "floor_area_m2": {
+        "id": "floor_area",
+        "kind": "floor_area",
+        "room_id": "room_01",
+        "value": 0.75,
+        "unit": "m2",
+        "interval": {
+          "estimate_m": 0.75,
+          "low_m": 0.67,
+          "high_m": 0.83,
+          "confidence": 0.95,
+          "method": "visual calibration interval"
+        }
+      },
+      "ceiling_height_m": {
+        "id": "ceiling_height",
+        "kind": "ceiling_height",
+        "room_id": "room_01",
+        "value": 2.5,
+        "unit": "m",
+        "interval": {
+          "estimate_m": 2.5,
+          "low_m": 2.25,
+          "high_m": 2.75,
+          "confidence": 0.95,
+          "method": "visual calibration interval"
+        }
+      },
+      "walls": [],
+      "openings": []
+    },
+    {
+      "id": "room_02",
+      "name": "Room 02",
+      "polygon_xy_m": [
+        [
+          0,
+          0
+        ],
+        [
+          1.0,
+          0
+        ],
+        [
+          1.0,
+          0.6666666666666667
+        ],
+        [
+          0,
+          0.6666666666666667
+        ]
+      ],
+      "floor_area_m2": {
+        "id": "floor_area",
+        "kind": "floor_area",
+        "room_id": "room_02",
+        "value": 0.6666666666666667,
+        "unit": "m2",
+        "interval": {
+          "estimate_m": 0.6666666666666667,
+          "low_m": 0.5866666666666668,
+          "high_m": 0.7466666666666667,
+          "confidence": 0.95,
+          "method": "visual calibration interval"
+        }
+      },
+      "ceiling_height_m": {
+        "id": "ceiling_height",
+        "kind": "ceiling_height",
+        "room_id": "room_02",
+        "value": 2.5,
+        "unit": "m",
+        "interval": {
+          "estimate_m": 2.5,
+          "low_m": 2.25,
+          "high_m": 2.75,
+          "confidence": 0.95,
+          "method": "visual calibration interval"
+        }
+      },
+      "walls": [],
+      "openings": []
+    }
+  ],
+  "plan": {
+    "rooms": [
+      {
+        "id": "room_01",
+        "name": "Room 01",
+        "polygon_xy_m": [
+          [
+            0,
+            0
+          ],
+          [
+            1.0,
+            0
+          ],
+          [
+            1.0,
+            0.75
+          ],
+          [
+            0,
+            0.75
+          ]
+        ],
+        "floor_area_m2": {
+          "id": "floor_area",
+          "kind": "floor_area",
+          "room_id": "room_01",
+          "value": 0.75,
+          "unit": "m2",
+          "interval": {
+            "estimate_m": 0.75,
+            "low_m": 0.67,
+            "high_m": 0.83,
+            "confidence": 0.95,
+            "method": "visual calibration interval"
+          }
+        },
+        "ceiling_height_m": {
+          "id": "ceiling_height",
+          "kind": "ceiling_height",
+          "room_id": "room_01",
+          "value": 2.5,
+          "unit": "m",
+          "interval": {
+            "estimate_m": 2.5,
+            "low_m": 2.25,
+            "high_m": 2.75,
+            "confidence": 0.95,
+            "method": "visual calibration interval"
+          }
+        },
+        "walls": [],
+        "openings": []
+      },
+      {
+        "id": "room_02",
+        "name": "Room 02",
+        "polygon_xy_m": [
+          [
+            0,
+            0
+          ],
+          [
+            1.0,
+            0
+          ],
+          [
+            1.0,
+            0.6666666666666667
+          ],
+          [
+            0,
+            0.6666666666666667
+          ]
+        ],
+        "floor_area_m2": {
+          "id": "floor_area",
+          "kind": "floor_area",
+          "room_id": "room_02",
+          "value": 0.6666666666666667,
+          "unit": "m2",
+          "interval": {
+            "estimate_m": 0.6666666666666667,
+            "low_m": 0.5866666666666668,
+            "high_m": 0.7466666666666667,
+            "confidence": 0.95,
+            "method": "visual calibration interval"
+          }
+        },
+        "ceiling_height_m": {
+          "id": "ceiling_height",
+          "kind": "ceiling_height",
+          "room_id": "room_02",
+          "value": 2.5,
+          "unit": "m",
+          "interval": {
+            "estimate_m": 2.5,
+            "low_m": 2.25,
+            "high_m": 2.75,
+            "confidence": 0.95,
+            "method": "visual calibration interval"
+          }
+        },
+        "walls": [],
+        "openings": []
+      }
+    ],
+    "adjacency": [],
+    "stitched_polygon_xy_m": [
+      [
+        0,
+        0
+      ],
+      [
+        1.0,
+        0
+      ],
+      [
+        1.0,
+        0.75
+      ],
+      [
+        0,
+        0.75
+      ]
+    ],
+    "drift": {
+      "method": "visual graph alignment",
+      "loop_closure_applied": false
+    }
+  },
+  "damage": [],
+  "scope": [],
+  "diagnostics": {
+    "line_segments": 17,
+    "input_frames": 4,
+    "calibration_status": "REQUIRED_BEFORE_ACCURACY_CLAIM",
+    "scale_m_per_pixel": null,
+    "note": "Monocular metric scale is not observable without a declared scale source.",
+    "rooms_detected": 2
+  }
+}

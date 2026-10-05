@@ -1,0 +1,745 @@
+{
+  "schema_version": "1.0",
+  "capture_id": "raw_single_scan_with_ceiling",
+  "tier": "lidar",
+  "device": {
+    "source": "LiDAR logger export",
+    "intrinsics": "camera_matrix.csv"
+  },
+  "rooms": [
+    {
+      "id": "room_01",
+      "name": "Room 01",
+      "polygon_xy_m": [
+        [
+          0.5086260373472944,
+          -5.510900954438764
+        ],
+        [
+          8.88424581522782,
+          -2.5432014894005204
+        ],
+        [
+          8.765565457323062,
+          -2.304288846064746
+        ],
+        [
+          8.597172238440782,
+          -2.1160557069491643
+        ],
+        [
+          7.930830511980903,
+          -1.5177588736036558
+        ],
+        [
+          4.848314912953417,
+          1.1858880784487769
+        ],
+        [
+          4.164549716355166,
+          1.7415040508472879
+        ],
+        [
+          1.3056593107538583,
+          3.6764217856225256
+        ],
+        [
+          -2.5834875701381455,
+          6.104164392027686
+        ],
+        [
+          -2.7257807202748294,
+          6.029151135546162
+        ],
+        [
+          -3.878180230006239,
+          3.685461154362774
+        ],
+        [
+          -3.914466112117433,
+          3.581661795888704
+        ],
+        [
+          -5.124172264770837,
+          -2.9042765338966348
+        ],
+        [
+          -4.493077665378489,
+          -4.059628407894835
+        ],
+        [
+          -2.759176288861536,
+          -4.886206564406694
+        ],
+        [
+          -2.739172739143061,
+          -4.8908607255199845
+        ]
+      ],
+      "floor_area_m2": {
+        "id": "floor_area",
+        "kind": "floor_area",
+        "room_id": "room_01",
+        "value": 93.05617018494725,
+        "unit": "m2",
+        "interval": {
+          "estimate_m": 93.05617018494725,
+          "low_m": 90.26448507939884,
+          "high_m": 95.84785529049566,
+          "confidence": 0.95,
+          "method": "pose-normalized floor hull"
+        }
+      },
+      "ceiling_height_m": {
+        "id": "ceiling_height",
+        "kind": "ceiling_height",
+        "room_id": "room_01",
+        "value": 2.948584395435766,
+        "unit": "m",
+        "interval": {
+          "estimate_m": 2.948584395435766,
+          "low_m": 2.8896127075270504,
+          "high_m": 3.007556083344481,
+          "confidence": 0.95,
+          "method": "pose-normalized vertical quantile"
+        }
+      },
+      "walls": [
+        {
+          "id": "wall_1",
+          "kind": "wall_length",
+          "room_id": "room_01",
+          "value": 8.885845304663574,
+          "unit": "m",
+          "interval": {
+            "estimate_m": 8.885845304663574,
+            "low_m": 8.79698685161694,
+            "high_m": 8.97470375771021,
+            "confidence": 0.95,
+            "method": "LiDAR plane/hull residual"
+          }
+        },
+        {
+          "id": "wall_2",
+          "kind": "wall_length",
+          "room_id": "room_01",
+          "value": 0.26676633689071105,
+          "unit": "m",
+          "interval": {
+            "estimate_m": 0.26676633689071105,
+            "low_m": 0.25176633689071104,
+            "high_m": 0.28176633689071107,
+            "confidence": 0.95,
+            "method": "LiDAR plane/hull residual"
+          }
+        },
+        {
+          "id": "wall_3",
+          "kind": "wall_length",
+          "room_id": "room_01",
+          "value": 0.25256284530160245,
+          "unit": "m",
+          "interval": {
+            "estimate_m": 0.25256284530160245,
+            "low_m": 0.23756284530160243,
+            "high_m": 0.26756284530160246,
+            "confidence": 0.95,
+            "method": "LiDAR plane/hull residual"
+          }
+        },
+        {
+          "id": "wall_4",
+          "kind": "wall_length",
+          "room_id": "room_01",
+          "value": 0.8955279991227496,
+          "unit": "m",
+          "interval": {
+            "estimate_m": 0.8955279991227496,
+            "low_m": 0.8805279991227496,
+            "high_m": 0.9105279991227496,
+            "confidence": 0.95,
+            "method": "LiDAR plane/hull residual"
+          }
+        },
+        {
+          "id": "wall_5",
+          "kind": "wall_length",
+          "room_id": "room_01",
+          "value": 4.100196246472867,
+          "unit": "m",
+          "interval": {
+            "estimate_m": 4.100196246472867,
+            "low_m": 4.0591942840081385,
+            "high_m": 4.141198208937596,
+            "confidence": 0.95,
+            "method": "LiDAR plane/hull residual"
+          }
+        },
+        {
+          "id": "wall_6",
+          "kind": "wall_length",
+          "room_id": "room_01",
+          "value": 0.8810470775522653,
+          "unit": "m",
+          "interval": {
+            "estimate_m": 0.8810470775522653,
+            "low_m": 0.8660470775522653,
+            "high_m": 0.8960470775522653,
+            "confidence": 0.95,
+            "method": "LiDAR plane/hull residual"
+          }
+        },
+        {
+          "id": "wall_7",
+          "kind": "wall_length",
+          "room_id": "room_01",
+          "value": 3.452124127488313,
+          "unit": "m",
+          "interval": {
+            "estimate_m": 3.452124127488313,
+            "low_m": 3.4176028862134302,
+            "high_m": 3.486645368763196,
+            "confidence": 0.95,
+            "method": "LiDAR plane/hull residual"
+          }
+        },
+        {
+          "id": "wall_8",
+          "kind": "wall_length",
+          "room_id": "room_01",
+          "value": 4.5846916607452375,
+          "unit": "m",
+          "interval": {
+            "estimate_m": 4.5846916607452375,
+            "low_m": 4.538844744137785,
+            "high_m": 4.63053857735269,
+            "confidence": 0.95,
+            "method": "LiDAR plane/hull residual"
+          }
+        },
+        {
+          "id": "wall_9",
+          "kind": "wall_length",
+          "room_id": "room_01",
+          "value": 0.16085499440111797,
+          "unit": "m",
+          "interval": {
+            "estimate_m": 0.16085499440111797,
+            "low_m": 0.145854994401118,
+            "high_m": 0.17585499440111796,
+            "confidence": 0.95,
+            "method": "LiDAR plane/hull residual"
+          }
+        },
+        {
+          "id": "wall_10",
+          "kind": "wall_length",
+          "room_id": "room_01",
+          "value": 2.611686688316304,
+          "unit": "m",
+          "interval": {
+            "estimate_m": 2.611686688316304,
+            "low_m": 2.585569821433141,
+            "high_m": 2.637803555199467,
+            "confidence": 0.95,
+            "method": "LiDAR plane/hull residual"
+          }
+        },
+        {
+          "id": "wall_11",
+          "kind": "wall_length",
+          "room_id": "room_01",
+          "value": 0.10995895625284943,
+          "unit": "m",
+          "interval": {
+            "estimate_m": 0.10995895625284943,
+            "low_m": 0.09495895625284943,
+            "high_m": 0.12495895625284943,
+            "confidence": 0.95,
+            "method": "LiDAR plane/hull residual"
+          }
+        },
+        {
+          "id": "wall_12",
+          "kind": "wall_length",
+          "room_id": "room_01",
+          "value": 6.597786370711478,
+          "unit": "m",
+          "interval": {
+            "estimate_m": 6.597786370711478,
+            "low_m": 6.531808507004363,
+            "high_m": 6.663764234418593,
+            "confidence": 0.95,
+            "method": "LiDAR plane/hull residual"
+          }
+        },
+        {
+          "id": "wall_13",
+          "kind": "wall_length",
+          "room_id": "room_01",
+          "value": 1.3164795274265917,
+          "unit": "m",
+          "interval": {
+            "estimate_m": 1.3164795274265917,
+            "low_m": 1.3014795274265918,
+            "high_m": 1.3314795274265916,
+            "confidence": 0.95,
+            "method": "LiDAR plane/hull residual"
+          }
+        },
+        {
+          "id": "wall_14",
+          "kind": "wall_length",
+          "room_id": "room_01",
+          "value": 1.9208449787293942,
+          "unit": "m",
+          "interval": {
+            "estimate_m": 1.9208449787293942,
+            "low_m": 1.9016365289421002,
+            "high_m": 1.9400534285166882,
+            "confidence": 0.95,
+            "method": "LiDAR plane/hull residual"
+          }
+        },
+        {
+          "id": "wall_15",
+          "kind": "wall_length",
+          "room_id": "room_01",
+          "value": 0.020537848402594927,
+          "unit": "m",
+          "interval": {
+            "estimate_m": 0.020537848402594927,
+            "low_m": 0.005537848402594928,
+            "high_m": 0.035537848402594927,
+            "confidence": 0.95,
+            "method": "LiDAR plane/hull residual"
+          }
+        },
+        {
+          "id": "wall_16",
+          "kind": "wall_length",
+          "room_id": "room_01",
+          "value": 3.306455319227813,
+          "unit": "m",
+          "interval": {
+            "estimate_m": 3.306455319227813,
+            "low_m": 3.273390766035535,
+            "high_m": 3.3395198724200914,
+            "confidence": 0.95,
+            "method": "LiDAR plane/hull residual"
+          }
+        }
+      ],
+      "openings": []
+    }
+  ],
+  "plan": {
+    "rooms": [
+      {
+        "id": "room_01",
+        "name": "Room 01",
+        "polygon_xy_m": [
+          [
+            0.5086260373472944,
+            -5.510900954438764
+          ],
+          [
+            8.88424581522782,
+            -2.5432014894005204
+          ],
+          [
+            8.765565457323062,
+            -2.304288846064746
+          ],
+          [
+            8.597172238440782,
+            -2.1160557069491643
+          ],
+          [
+            7.930830511980903,
+            -1.5177588736036558
+          ],
+          [
+            4.848314912953417,
+            1.1858880784487769
+          ],
+          [
+            4.164549716355166,
+            1.7415040508472879
+          ],
+          [
+            1.3056593107538583,
+            3.6764217856225256
+          ],
+          [
+            -2.5834875701381455,
+            6.104164392027686
+          ],
+          [
+            -2.7257807202748294,
+            6.029151135546162
+          ],
+          [
+            -3.878180230006239,
+            3.685461154362774
+          ],
+          [
+            -3.914466112117433,
+            3.581661795888704
+          ],
+          [
+            -5.124172264770837,
+            -2.9042765338966348
+          ],
+          [
+            -4.493077665378489,
+            -4.059628407894835
+          ],
+          [
+            -2.759176288861536,
+            -4.886206564406694
+          ],
+          [
+            -2.739172739143061,
+            -4.8908607255199845
+          ]
+        ],
+        "floor_area_m2": {
+          "id": "floor_area",
+          "kind": "floor_area",
+          "room_id": "room_01",
+          "value": 93.05617018494725,
+          "unit": "m2",
+          "interval": {
+            "estimate_m": 93.05617018494725,
+            "low_m": 90.26448507939884,
+            "high_m": 95.84785529049566,
+            "confidence": 0.95,
+            "method": "pose-normalized floor hull"
+          }
+        },
+        "ceiling_height_m": {
+          "id": "ceiling_height",
+          "kind": "ceiling_height",
+          "room_id": "room_01",
+          "value": 2.948584395435766,
+          "unit": "m",
+          "interval": {
+            "estimate_m": 2.948584395435766,
+            "low_m": 2.8896127075270504,
+            "high_m": 3.007556083344481,
+            "confidence": 0.95,
+            "method": "pose-normalized vertical quantile"
+          }
+        },
+        "walls": [
+          {
+            "id": "wall_1",
+            "kind": "wall_length",
+            "room_id": "room_01",
+            "value": 8.885845304663574,
+            "unit": "m",
+            "interval": {
+              "estimate_m": 8.885845304663574,
+              "low_m": 8.79698685161694,
+              "high_m": 8.97470375771021,
+              "confidence": 0.95,
+              "method": "LiDAR plane/hull residual"
+            }
+          },
+          {
+            "id": "wall_2",
+            "kind": "wall_length",
+            "room_id": "room_01",
+            "value": 0.26676633689071105,
+            "unit": "m",
+            "interval": {
+              "estimate_m": 0.26676633689071105,
+              "low_m": 0.25176633689071104,
+              "high_m": 0.28176633689071107,
+              "confidence": 0.95,
+              "method": "LiDAR plane/hull residual"
+            }
+          },
+          {
+            "id": "wall_3",
+            "kind": "wall_length",
+            "room_id": "room_01",
+            "value": 0.25256284530160245,
+            "unit": "m",
+            "interval": {
+              "estimate_m": 0.25256284530160245,
+              "low_m": 0.23756284530160243,
+              "high_m": 0.26756284530160246,
+              "confidence": 0.95,
+              "method": "LiDAR plane/hull residual"
+            }
+          },
+          {
+            "id": "wall_4",
+            "kind": "wall_length",
+            "room_id": "room_01",
+            "value": 0.8955279991227496,
+            "unit": "m",
+            "interval": {
+              "estimate_m": 0.8955279991227496,
+              "low_m": 0.8805279991227496,
+              "high_m": 0.9105279991227496,
+              "confidence": 0.95,
+              "method": "LiDAR plane/hull residual"
+            }
+          },
+          {
+            "id": "wall_5",
+            "kind": "wall_length",
+            "room_id": "room_01",
+            "value": 4.100196246472867,
+            "unit": "m",
+            "interval": {
+              "estimate_m": 4.100196246472867,
+              "low_m": 4.0591942840081385,
+              "high_m": 4.141198208937596,
+              "confidence": 0.95,
+              "method": "LiDAR plane/hull residual"
+            }
+          },
+          {
+            "id": "wall_6",
+            "kind": "wall_length",
+            "room_id": "room_01",
+            "value": 0.8810470775522653,
+            "unit": "m",
+            "interval": {
+              "estimate_m": 0.8810470775522653,
+              "low_m": 0.8660470775522653,
+              "high_m": 0.8960470775522653,
+              "confidence": 0.95,
+              "method": "LiDAR plane/hull residual"
+            }
+          },
+          {
+            "id": "wall_7",
+            "kind": "wall_length",
+            "room_id": "room_01",
+            "value": 3.452124127488313,
+            "unit": "m",
+            "interval": {
+              "estimate_m": 3.452124127488313,
+              "low_m": 3.4176028862134302,
+              "high_m": 3.486645368763196,
+              "confidence": 0.95,
+              "method": "LiDAR plane/hull residual"
+            }
+          },
+          {
+            "id": "wall_8",
+            "kind": "wall_length",
+            "room_id": "room_01",
+            "value": 4.5846916607452375,
+            "unit": "m",
+            "interval": {
+              "estimate_m": 4.5846916607452375,
+              "low_m": 4.538844744137785,
+              "high_m": 4.63053857735269,
+              "confidence": 0.95,
+              "method": "LiDAR plane/hull residual"
+            }
+          },
+          {
+            "id": "wall_9",
+            "kind": "wall_length",
+            "room_id": "room_01",
+            "value": 0.16085499440111797,
+            "unit": "m",
+            "interval": {
+              "estimate_m": 0.16085499440111797,
+              "low_m": 0.145854994401118,
+              "high_m": 0.17585499440111796,
+              "confidence": 0.95,
+              "method": "LiDAR plane/hull residual"
+            }
+          },
+          {
+            "id": "wall_10",
+            "kind": "wall_length",
+            "room_id": "room_01",
+            "value": 2.611686688316304,
+            "unit": "m",
+            "interval": {
+              "estimate_m": 2.611686688316304,
+              "low_m": 2.585569821433141,
+              "high_m": 2.637803555199467,
+              "confidence": 0.95,
+              "method": "LiDAR plane/hull residual"
+            }
+          },
+          {
+            "id": "wall_11",
+            "kind": "wall_length",
+            "room_id": "room_01",
+            "value": 0.10995895625284943,
+            "unit": "m",
+            "interval": {
+              "estimate_m": 0.10995895625284943,
+              "low_m": 0.09495895625284943,
+              "high_m": 0.12495895625284943,
+              "confidence": 0.95,
+              "method": "LiDAR plane/hull residual"
+            }
+          },
+          {
+            "id": "wall_12",
+            "kind": "wall_length",
+            "room_id": "room_01",
+            "value": 6.597786370711478,
+            "unit": "m",
+            "interval": {
+              "estimate_m": 6.597786370711478,
+              "low_m": 6.531808507004363,
+              "high_m": 6.663764234418593,
+              "confidence": 0.95,
+              "method": "LiDAR plane/hull residual"
+            }
+          },
+          {
+            "id": "wall_13",
+            "kind": "wall_length",
+            "room_id": "room_01",
+            "value": 1.3164795274265917,
+            "unit": "m",
+            "interval": {
+              "estimate_m": 1.3164795274265917,
+              "low_m": 1.3014795274265918,
+              "high_m": 1.3314795274265916,
+              "confidence": 0.95,
+              "method": "LiDAR plane/hull residual"
+            }
+          },
+          {
+            "id": "wall_14",
+            "kind": "wall_length",
+            "room_id": "room_01",
+            "value": 1.9208449787293942,
+            "unit": "m",
+            "interval": {
+              "estimate_m": 1.9208449787293942,
+              "low_m": 1.9016365289421002,
+              "high_m": 1.9400534285166882,
+              "confidence": 0.95,
+              "method": "LiDAR plane/hull residual"
+            }
+          },
+          {
+            "id": "wall_15",
+            "kind": "wall_length",
+            "room_id": "room_01",
+            "value": 0.020537848402594927,
+            "unit": "m",
+            "interval": {
+              "estimate_m": 0.020537848402594927,
+              "low_m": 0.005537848402594928,
+              "high_m": 0.035537848402594927,
+              "confidence": 0.95,
+              "method": "LiDAR plane/hull residual"
+            }
+          },
+          {
+            "id": "wall_16",
+            "kind": "wall_length",
+            "room_id": "room_01",
+            "value": 3.306455319227813,
+            "unit": "m",
+            "interval": {
+              "estimate_m": 3.306455319227813,
+              "low_m": 3.273390766035535,
+              "high_m": 3.3395198724200914,
+              "confidence": 0.95,
+              "method": "LiDAR plane/hull residual"
+            }
+          }
+        ],
+        "openings": []
+      }
+    ],
+    "adjacency": [],
+    "stitched_polygon_xy_m": [
+      [
+        0.5086260373472944,
+        -5.510900954438764
+      ],
+      [
+        8.88424581522782,
+        -2.5432014894005204
+      ],
+      [
+        8.765565457323062,
+        -2.304288846064746
+      ],
+      [
+        8.597172238440782,
+        -2.1160557069491643
+      ],
+      [
+        7.930830511980903,
+        -1.5177588736036558
+      ],
+      [
+        4.848314912953417,
+        1.1858880784487769
+      ],
+      [
+        4.164549716355166,
+        1.7415040508472879
+      ],
+      [
+        1.3056593107538583,
+        3.6764217856225256
+      ],
+      [
+        -2.5834875701381455,
+        6.104164392027686
+      ],
+      [
+        -2.7257807202748294,
+        6.029151135546162
+      ],
+      [
+        -3.878180230006239,
+        3.685461154362774
+      ],
+      [
+        -3.914466112117433,
+        3.581661795888704
+      ],
+      [
+        -5.124172264770837,
+        -2.9042765338966348
+      ],
+      [
+        -4.493077665378489,
+        -4.059628407894835
+      ],
+      [
+        -2.759176288861536,
+        -4.886206564406694
+      ],
+      [
+        -2.739172739143061,
+        -4.8908607255199845
+      ]
+    ],
+    "drift": {
+      "method": "pose-aware layer; fixture reconstruction uses local frame",
+      "loop_closure_applied": false
+    }
+  },
+  "damage": [],
+  "scope": [],
+  "diagnostics": {
+    "frames_available": 5757,
+    "frames_sampled": 120,
+    "frames_used": 120,
+    "point_count": 309339,
+    "imu_rows": 21339
+  }
+}

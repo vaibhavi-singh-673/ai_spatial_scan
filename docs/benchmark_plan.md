@@ -19,7 +19,21 @@ The benchmark must be collected before any accuracy claim is written.
 
 ## Repeatability
 
-Capture the same room twice at the same tier without changing furniture. Do not use the first run to initialize the second run.
+Capture the same room twice at the same tier without changing furniture. Do not
+use the first run to initialize the second run. Give both rows the same
+`repeat_group`, tier, room IDs, and ground-truth property; use different
+`capture_id` and raw capture paths. The runner compares per-room floor area,
+ceiling height, wall lengths, and opening widths for every pair in a group.
+Missing/incomplete measurements stay `NOT_RUN`.
+
+Optionally set `repeatability_tolerances` at the manifest top level using the
+keys `floor_area_relative`, `ceiling_height_m`, `wall_length_m`, and
+`opening_width_m`. Values are maximum allowed pairwise deltas (floor area uses
+a relative fraction; the other dimensions use metres). Only populate limits
+specified by the challenge rubric or a documented benchmark protocol. Without
+a declared tolerance, the runner reports deltas as `REVIEW`, not PASS/FAIL.
+The report is `benchmarks/results/benchmark.json` under its `repeatability`
+field.
 
 ## Head-to-head
 

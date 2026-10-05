@@ -3,8 +3,9 @@ from ..io.lidar import load_lidar
 from ..geometry.lidar_recon import reconstruct_lidar
 
 def run(input_dir,capture_id="capture"):
-    K,frames,imu=load_lidar(input_dir)
+    K,frames,imu=load_lidar(input_dir,max_frames=120)
     r=reconstruct_lidar(K,frames,imu)
+    available_frames=len(list((Path(input_dir)/"depth").glob("*.png")))
     poly=r["polygon"].tolist()
     room_id="room_01"
     walls=[]
@@ -27,5 +28,5 @@ def run(input_dir,capture_id="capture"):
               "drift":{"method":"pose-aware layer; fixture reconstruction uses local frame",
                        "loop_closure_applied":False}},
       "damage":[],"scope":[],
-      "diagnostics":{"frames_available":len(frames),"frames_used":r["frame_count"],
+      "diagnostics":{"frames_available":available_frames,"frames_sampled":len(frames),"frames_used":r["frame_count"],
                      "point_count":len(r["points"]),"imu_rows":len(imu)}}

@@ -10,8 +10,10 @@
       "ground_truth_path": "benchmarks/ground_truth/A.json",
       "repeat_group": "R1_lidar_repeat",
       "incumbent_export": "benchmarks/raw/incumbent/A_R1.zip",
+      "incumbent_measurements": "benchmarks/ground_truth/incumbent/A_R1.csv",
       "conditions": ["clean", "clutter", "glass"]
     }
   ],
+  "repeatability_tolerances": {},
   "notes": "Replace this example with measured captures. Never synthesize gate results."
 }

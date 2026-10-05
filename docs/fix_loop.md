@@ -35,3 +35,19 @@ Current fixture result:
 This is an implementation ablation, not a ground-truth accuracy result. The
 large ceiling delta is exactly why laser/tape validation and calibration remain
 required before submission.
+
+## Measured before/after run
+
+Run the same LiDAR raw capture with the measured property ground truth to
+evaluate both the pose/IMU-disabled baseline and the current implementation:
+
+```bash
+python -m spatialscan fixloop --input benchmarks/raw/<capture_id> --ground-truth benchmarks/ground_truth/<property>.json --output benchmarks/results/<capture_id>_fixloop.json
+```
+
+The report includes both per-gate evaluations and status changes. A gate can
+still be `NOT_RUN` when the ground truth omits required dimensions. This command
+does not itself create a physical fix: after changing reconstruction code,
+rerun it on the unchanged capture and preserve the before/after artifacts and
+code revision. The fixture ablation above must not be presented as real
+property improvement.

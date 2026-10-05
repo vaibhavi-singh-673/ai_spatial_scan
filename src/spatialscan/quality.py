@@ -73,18 +73,21 @@ def _lidar_quality(folder):
     if missing:
         return checks
     try:
-        K, frames, imu = load_lidar(root)
+        depth_paths = sorted((root / "depth").glob("*.png"))
+        sampled_total = min(len(depth_paths), 120)
+        K, frames, imu = load_lidar(root, max_frames=120)
         depth_frames = sum(frame[1] is not None for frame in frames)
         confidence_frames = sum(frame[2] is not None for frame in frames)
         pose_frames = sum(frame[3] is not None for frame in frames)
         checks.extend([
             _check("camera_matrix", K.shape == (3, 3), 20, {"shape": list(K.shape)}, True),
             _check("depth_frames_decoded", depth_frames > 0, 25,
-                   {"decoded": depth_frames, "total": len(frames)}, True),
+                   {"decoded_sample": depth_frames, "sampled_total": sampled_total,
+                    "available_total": len(depth_paths), "sampling_limit": 120}, True),
             _check("confidence_coverage", confidence_frames == depth_frames, 10,
-                   {"with_confidence": confidence_frames, "depth_frames": depth_frames}),
+                   {"with_confidence": confidence_frames, "sampled_depth_frames": depth_frames}),
             _check("pose_coverage", pose_frames == depth_frames, 10,
-                   {"with_pose": pose_frames, "depth_frames": depth_frames}),
+                   {"with_pose": pose_frames, "sampled_depth_frames": depth_frames}),
             _check("imu_samples", len(imu) > 0, 10, {"samples": len(imu)}),
         ])
     except (OSError, ValueError, TypeError) as error:
